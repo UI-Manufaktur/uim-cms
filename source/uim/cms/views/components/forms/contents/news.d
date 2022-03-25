@@ -1,4 +1,4 @@
-module uim.cms.views.components.forms.bodies.news;
+module uim.cms.views.components.forms.contents.news;
 
 @safe:
 import uim.cms;

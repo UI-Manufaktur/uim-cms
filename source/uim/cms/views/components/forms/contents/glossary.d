@@ -1,4 +1,4 @@
-module uim.cms.views.components.forms.bodies.glossary;
+module uim.cms.views.components.forms.contents.glossary;
 
 @safe:
 import uim.cms;

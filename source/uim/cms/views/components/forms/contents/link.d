@@ -1,4 +1,4 @@
-module uim.cms.views.components.forms.bodies.link;
+module uim.cms.views.components.forms.contents.link;
 
 @safe:
 import uim.cms;

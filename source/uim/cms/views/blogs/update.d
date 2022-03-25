@@ -10,16 +10,19 @@ class DCMSBlogsUpdateView : DAPPEntityUpdateView {
   override void initialize() {
     super.initialize;
 
+    this
+      .rootPath("/cms/blogs");
+
     auto bc = BS5Breadcrumb(
       BS5BreadcrumbList
       .link(["href":"/cms"], "CMS")
-      .link(["href":myRootPath], "Blogs")
+      .link(["href":rootPath], "Blogs")
     );
 
     if (auto pgHeader = cast(DPageHeader)this.header) {
       pgHeader
         .breadcrumbs(bc)
-        .rootPath(myRootPath)
+        .rootPath(rootPath)
         .title(titleEdit("Blog bearbeiten"));
     }
 
@@ -27,13 +30,13 @@ class DCMSBlogsUpdateView : DAPPEntityUpdateView {
       frm
         .action("/cms/blogs/actions/save")
         .crudMode(CRUDModes.Update)
-        .rootPath(myRootPath)
+        .rootPath(rootPath)
         .content(
           CMSPostFormContent);
 
       if (auto frmHeader = cast(DFormHeader)frm.header) {
         frmHeader
-          .rootPath(myRootPath)
+          .rootPath(rootPath)
           .mainTitle("Blogs")
           .subTitle("Blogs anzeigen");
       }

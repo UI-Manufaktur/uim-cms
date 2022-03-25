@@ -10,17 +10,21 @@ class DCMSBlogsReadView : DAPPEntityReadView {
   override void initialize() {
     super.initialize;
 
+    this
+      .rootPath("/cms/blogs");
+
     auto bc = BS5Breadcrumb(
       BS5BreadcrumbList
       .link(["href":"/cms"], "CMS")
-      .link(["href":myRootPath], "Blogs")
+      .link(["href":rootPath], "Blogs")
+      .link(["href":rootPath], "Anzeigen")
     );
 
     this
       .header(
         PageHeader(this)
           .breadcrumbs(bc)
-          .rootPath(myRootPath)
+          .rootPath(rootPath)
           .title(titleView("Blog anzeigen"))
           .actions([["refresh", "list", "create"]])
       );
@@ -28,7 +32,6 @@ class DCMSBlogsReadView : DAPPEntityReadView {
     if (auto frm = cast(DForm)this.form) {
       frm
         .crudMode(this.crudMode)
-        .rootPath(myRootPath)
         .content(
           CMSPostFormContent);
 
