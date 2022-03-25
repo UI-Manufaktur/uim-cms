@@ -3,7 +3,7 @@ module uim.cms.controllers.pages.docus.create;
 @safe:
 import uim.cms;
 
-class DCMSDocusCreatePageController : DCMSPageController {
+class DCMSDocusCreatePageController : DCMSCreatePageController {
   mixin(APPPageControllerThis!("CMSDocusCreatePageController"));
 
   override void initialize() {
@@ -23,25 +23,9 @@ class DCMSDocusCreatePageController : DCMSPageController {
     })
   });`);
 
-  }
-
-  override void beforeResponse(STRINGAA options = null) {
-    debugMethodCall(moduleName!DCMSDocusUpdatePageController~":DCMSDocusUpdatePageController::beforeResponse");
-    super.beforeResponse(options);
-    if (hasError || "redirect" in options) { return; }
-
-    auto entityId = options.get("entity_id", options.get("id", options.get("entityId", null)));
-    if (entityId && entityId.isUUID && this.database) {  
-      auto dbEntity = database["uim", "cms_docus"].createFromTemplate;      
-      if (auto entityView = cast(DAPPEntityCRUDView)this.view) {
-        with(entityView) {
-          entity(dbEntity);
-          crudMode(CRUDModes.Create);
-          rootPath("/cms/docus");
-          readonly(true);
-        }
-      }
-    }
+  this
+    .rootPath("/cms/docus") 
+    .collectionName("cms_docus"); 
   }
 }
 mixin(APPPageControllerCalls!("CMSDocusCreatePageController"));

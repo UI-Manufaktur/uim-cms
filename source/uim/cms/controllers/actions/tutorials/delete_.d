@@ -3,20 +3,15 @@ module uim.cms.controllers.actions.tutorials.delete_;
 @safe:
 import uim.cms;
 
-class DCMSTutorialDeleteAction : DCMSTutorialAction {
+class DCMSTutorialDeleteAction : DCMSDeleteAction {
   mixin(APPControllerThis!("CMSTutorialDeleteAction"));
 
-  override void beforeResponse(STRINGAA options = null) {
-    debugMethodCall(moduleName!DCMSTutorialDeleteAction~":DCMSTutorialDeleteAction::beforeResponse");
-    super.beforeResponse(options);
-    if (hasError || "redirect" in options) { return; }    
+  override void initialize() {
+    super.initialize;
 
-    auto appSession = getAppSession(options);
-
-    auto entity = CMSTutorial.fromRequest(options);  
-    database[appSession.site, collectionName].removeOne(entity);
-
-    options["redirect"] = rootPath;
-	}
+    this
+    .rootPath("/cms/tutorials") 
+    .collectionName("cms_tutorials"); 
+  }
 }
 mixin(APPControllerCalls!("CMSTutorialDeleteAction"));

@@ -3,7 +3,7 @@ module uim.cms.controllers.pages.links.update;
 @safe:
 import uim.cms;
 
-class DCMSLinksUpdatePageController : DCMSPageController {
+class DCMSLinksUpdatePageController : DCMSUpdatePageController {
   mixin(APPPageControllerThis!("CMSLinksUpdatePageController"));
 
   override void initialize() {
@@ -18,28 +18,9 @@ class DCMSLinksUpdatePageController : DCMSPageController {
   })
 });`);
 
-  }
-
-  override void beforeResponse(STRINGAA options = null) {
-    debugMethodCall(moduleName!DCMSLinksUpdatePageController~":DCMSLinksUpdatePageController::beforeResponse");
-    super.beforeResponse(options);
-    if (hasError || "redirect" in options) { return; }
-
-    auto entityId = options.get("entity_id", null);
-    if (entityId && entityId.isUUID && this.database) {  
-      if (auto dbEntity = database["uim", "cms_links"].findOne(UUID(entityId))) {
-        
-        if (auto entityView = cast(DAPPEntityCRUDView)this.view) {
-
-          debug writeln("Setting entityView");
-          with(entityView) {
-            entity(dbEntity);
-            crudMode(CRUDModes.Update);
-            rootPath("/cms/links");
-          }
-        }
-      }
-    }
+    this
+      .rootPath("/cms/links") 
+      .collectionName("cms_links"); 
   }
 }
 mixin(APPPageControllerCalls!("CMSLinksUpdatePageController"));

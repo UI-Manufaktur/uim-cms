@@ -13,7 +13,7 @@ class DCMSPagesCreateView : DAPPEntityCreateView {
     auto bc = BS5Breadcrumb(
       BS5BreadcrumbList
       .link(["href":"/cms"], "CMS")
-      .link(["href":myRootPath], "Pages")
+      .link(["href":this.rootPath], "Pages")
     );
 
 if (auto header = cast(DPageHeader)this.header) {

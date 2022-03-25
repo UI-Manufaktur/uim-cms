@@ -10,10 +10,12 @@ class DCMSDocusIndexView : DAPPEntitiesListView {
   override void initialize() {
     super.initialize;
 
+    this.rootPath("/cms/docus");
+
     auto bc = BS5Breadcrumb(
       BS5BreadcrumbList
       .link(["href":"/cms"], "CMS")
-      .link(["href":myRootPath], "Docus")
+      .link(["href":this.rootPath], "Docus")
     );
 
     auto headerTitle = titleList("Docus");
@@ -21,11 +23,22 @@ class DCMSDocusIndexView : DAPPEntitiesListView {
 
     this
       .header(
-        PageHeader(this).breadcrumbs(bc)// .rootPath(myRootPath).title(titleView("Übersicht Docus")).actions(["refresh", "list", "create"]))
+        PageHeader(this)
+          .breadcrumbs(bc)
+          .title(titleView("Übersicht Docus"))
+          .actions([["refresh", "list", "create"]])
+          .rootPath(this.rootPath)
       )
       .form(
-        APPEntitiesListForm(this)// .rootPath(myRootPath));
-      );
+        APPEntitiesListForm(this)
+          .header(
+            FormHeader
+              .mainTitle("Docus")
+              .subTitle("Docus anzeigen")
+              .actions([["print", "export"]]))
+          .content(EntitiesFormContent)
+          .rootPath(this.rootPath));
+
 /*       .form
         .header(FormHeader// .rootPath(myRootPath)// .mainTitle("Docus")// .subTitle("Docus anzeigen").actions([["print", "export"]]))
         .content(APPListFormContent// .rootPath(myRootPath));
@@ -35,16 +48,11 @@ class DCMSDocusIndexView : DAPPEntitiesListView {
   override void beforeH5(STRINGAA options = null) {
     debugMethodCall(moduleName!DCMSDocusIndexView~":DCMSDocusIndexView("~this.name~")::beforeH5");
     super.beforeH5(options);
+    if (hasError || "redirect" in options) { return; }
 
     if (auto frm = cast(DForm)this.form) {
-      frm
-        .header(
-          FormHeader
-            .rootPath("/docus")
-            .mainTitle("Docus")
-            .subTitle("Übersicht Docus")
-            .actions([["refresh"],["create"]]));
-    }
+      frm.entities(this.entities);
+    } 
   }
 
 /*   override DH5Obj[] toH5(STRINGAA options = null) {

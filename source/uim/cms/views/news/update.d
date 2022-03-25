@@ -13,7 +13,7 @@ class DCMSNewsUpdateView : DAPPEntityUpdateView {
     auto bc = BS5Breadcrumb(
       BS5BreadcrumbList
       .link(["href":"/cms"], "CMS")
-      .link(["href":myRootPath], "News")
+      .link(["href":this.rootPath], "News")
     );
 
     if (auto header = cast(DPageHeader)this.header) {

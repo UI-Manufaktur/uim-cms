@@ -10,10 +10,12 @@ class DCMSTutorialsIndexView : DAPPEntitiesListView {
   override void initialize() {
     super.initialize;
 
+    this.rootPath("/cms/tutorials");
+
     auto bc = BS5Breadcrumb(
       BS5BreadcrumbList
       .link(["href":"/cms"], "CMS")
-      .link(["href":myRootPath], "Tutorials")
+      .link(["href":this.rootPath], "Tutorials")
     );
 
     auto headerTitle = titleList("Tutorials");
@@ -21,14 +23,22 @@ class DCMSTutorialsIndexView : DAPPEntitiesListView {
 
     this
       .header(
-        PageHeader(this).breadcrumbs(bc)// .rootPath(myRootPath).title(titleView("Übersicht Tutorials")).actions(["refresh", "list", "create"]))
+        PageHeader(this)
+          .breadcrumbs(bc)
+          .title(titleView("Übersicht Tutorials"))
+          .actions([["refresh", "list", "create"]])
+          .rootPath(this.rootPath)
       )
-      .form(APPEntitiesListForm(this));// .rootPath(myRootPath));
-/*       .form
-        .header(FormHeader// .rootPath(myRootPath)// .mainTitle("Tutorials")// .subTitle("Tutorials anzeigen").actions([["print", "export"]]))
-        .content(APPListFormContent// .rootPath(myRootPath));
-        
- */  }
+      .form(
+        APPEntitiesListForm(this)
+          .header(
+            FormHeader
+              .mainTitle("Tutorials")
+              .subTitle("Tutorials anzeigen")
+              .actions([["print", "export"]]))
+          .content(EntitiesFormContent)
+          .rootPath(this.rootPath));
+  }
 
   override void beforeH5(STRINGAA options = null) {
     debugMethodCall(moduleName!DCMSTutorialsIndexView~":DCMSTutorialsIndexView("~this.name~")::beforeH5");
@@ -36,13 +46,8 @@ class DCMSTutorialsIndexView : DAPPEntitiesListView {
     if (hasError || "redirect" in options) { return; }
 
     if (auto frm = cast(DForm)this.form) {
-      frm.header(
-        FormHeader
-        .rootPath("/tutorials")
-        .mainTitle("Tutorials")
-        .subTitle("Übersicht Tutorials")
-        .actions([["refresh"],["create"]]));
-    }
+      frm.entities(this.entities);
+    } 
   }
 
 /*   override DH5Obj[] toH5(STRINGAA options = null) {

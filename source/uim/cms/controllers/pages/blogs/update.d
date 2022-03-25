@@ -3,7 +3,7 @@ module uim.cms.controllers.pages.blogs.update;
 @safe:
 import uim.cms;
 
-class DCMSBlogsUpdatePageController : DCMSPageController {
+class DCMSBlogsUpdatePageController : DCMSUpdatePageController {
   mixin(APPPageControllerThis!("CMSBlogsUpdatePageController"));
 
   override void initialize() {
@@ -21,28 +21,10 @@ class DCMSBlogsUpdatePageController : DCMSPageController {
         editorText.save();
       })
     });`);
-  }
 
-  override void beforeResponse(STRINGAA options = null) {
-    debugMethodCall(moduleName!DCMSBlogsUpdatePageController~":DCMSBlogsUpdatePageController::beforeResponse");
-    super.beforeResponse(options);
-    if (hasError || "redirect" in options) { return; }
-
-    auto entityId = options.get("entity_id", options.get("id", options.get("entityId", null)));
-    if (entityId && entityId.isUUID && this.database) {  
-      if (auto dbEntity = database["uim", "cms_blogs"].findOne(UUID(entityId))) {
-        
-        if (auto entityView = cast(DAPPEntityCRUDView)this.view) {
-
-          debug writeln("Setting entityView");
-          with(entityView) {
-            entity(dbEntity);
-            crudMode(CRUDModes.Update);
-            rootPath("/cms/blogs");
-          }
-        }
-      }
-    }
+    this
+      .rootPath("/cms/blogs") 
+      .collectionName("cms_blogs");   
   }
 }
 mixin(APPPageControllerCalls!("CMSBlogsUpdatePageController"));

@@ -13,7 +13,7 @@ class DCMSPagesIndexView : DAPPEntitiesListView {
     auto bc = BS5Breadcrumb(
       BS5BreadcrumbList
       .link(["href":"/cms"], "CMS")
-      .link(["href":myRootPath], "Pages")
+      .link(["href":this.rootPath], "Pages")
     );
 
     auto headerTitle = titleList("Pages");

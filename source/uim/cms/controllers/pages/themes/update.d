@@ -3,7 +3,7 @@ module uim.cms.controllers.pages.themes.update;
 @safe:
 import uim.cms;
 
-class DCMSThemesUpdatePageController : DCMSPageController {
+class DCMSThemesUpdatePageController : DCMSUpdatePageController {
   mixin(APPPageControllerThis!("CMSThemesUpdatePageController"));
 
   override void initialize() {
@@ -18,28 +18,9 @@ class DCMSThemesUpdatePageController : DCMSPageController {
   })
 });`);
 
-  }
-
-  override void beforeResponse(STRINGAA options = null) {
-    debugMethodCall(moduleName!DCMSThemesUpdatePageController~":DCMSThemesUpdatePageController::beforeResponse");
-    super.beforeResponse(options);
-    if (hasError || "redirect" in options) { return; }
-
-    auto entityId = options.get("entity_id", null);
-    if (entityId && entityId.isUUID && this.database) {  
-      if (auto dbEntity = database["uim", "cms_themes"].findOne(UUID(entityId))) {
-        
-        if (auto entityView = cast(DAPPEntityCRUDView)this.view) {
-
-          debug writeln("Setting entityView");
-          with(entityView) {
-            entity(dbEntity);
-            crudMode(CRUDModes.Update);
-            rootPath("/cms/themes");
-          }
-        }
-      }
-    }
+    this
+      .rootPath("/cms/themes") 
+      .collectionName("cms_themes"); 
   }
 }
 mixin(APPPageControllerCalls!("CMSThemesUpdatePageController"));

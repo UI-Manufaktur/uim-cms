@@ -13,7 +13,7 @@ class DCMSPagesDeleteView : DAPPEntityDeleteView {
     auto bc = BS5Breadcrumb(
       BS5BreadcrumbList
       .link(["href":"/cms"], "CMS")
-      .link(["href":myRootPath], "Pages")
+      .link(["href":this.rootPath], "Pages")
     );
 
     this

@@ -3,20 +3,15 @@ module uim.cms.controllers.actions.offers.delete_;
 @safe:
 import uim.cms;
 
-class DCMSOfferDeleteAction : DCMSOfferAction {
+class DCMSOfferDeleteAction : DCMSDeleteAction {
   mixin(APPControllerThis!("CMSOfferDeleteAction"));
 
-  override void beforeResponse(STRINGAA options = null) {
-    debugMethodCall(moduleName!DCMSOfferDeleteAction~":DCMSOfferDeleteAction::beforeResponse");
-    super.beforeResponse(options);
-    if (hasError || "redirect" in options) { return; }    
+  override void initialize() {
+    super.initialize;
 
-    auto appSession = getAppSession(options);
-
-    auto entity = CMSOffer.fromRequest(options);  
-    database[appSession.site, collectionName].removeOne(entity);
-
-    options["redirect"] = rootPath;
-	}
+    this
+    .rootPath("/cms/offers") 
+    .collectionName("cms_offers"); 
+  }
 }
 mixin(APPControllerCalls!("CMSOfferDeleteAction"));

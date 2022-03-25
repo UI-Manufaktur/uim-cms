@@ -7,9 +7,8 @@ import uim.cms;
 public import uim.cms.views.components.forms.form;
 
 // Packages
-public import uim.cms.views.components.forms.bodies;
+public import uim.cms.views.components.forms.contents;
 public import uim.cms.views.components.forms.groups;
-public import uim.cms.views.components.forms.headers;
 public import uim.cms.views.components.forms.posts;
 
 // Modules

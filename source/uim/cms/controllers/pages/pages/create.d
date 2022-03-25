@@ -3,7 +3,7 @@ module uim.cms.controllers.pages.pages.create;
 @safe:
 import uim.cms;
 
-class DCMSPagesCreatePageController : DCMSPageController {
+class DCMSPagesCreatePageController : DCMSCreatePageController {
   mixin(APPPageControllerThis!("CMSPagesCreatePageController"));
 
   override void initialize() {
@@ -20,25 +20,9 @@ class DCMSPagesCreatePageController : DCMSPageController {
   })
 });`);
 
-  }
-
-  override void beforeResponse(STRINGAA options = null) {
-    debugMethodCall(moduleName!DCMSPagesUpdatePageController~":DCMSPagesUpdatePageController::beforeResponse");
-    super.beforeResponse(options);
-    if (hasError || "redirect" in options) { return; }
-
-    auto entityId = options.get("entity_id", options.get("id", options.get("entityId", null)));
-    if (entityId && entityId.isUUID && this.database) {  
-      auto dbEntity = database["uim", "cms_pages"].createFromTemplate;      
-      if (auto entityView = cast(DAPPEntityCRUDView)this.view) {
-        with(entityView) {
-          entity(dbEntity);
-          crudMode(CRUDModes.Create);
-          rootPath("/cms/pages");
-          readonly(true);
-        }
-      }
-    }
+    this
+      .rootPath("/cms/pages") 
+      .collectionName("cms_pages"); 
   }
 }
 mixin(APPPageControllerCalls!("CMSPagesCreatePageController"));

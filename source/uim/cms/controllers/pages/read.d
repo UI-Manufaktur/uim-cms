@@ -56,16 +56,34 @@ else addToPageScript(reqParameters,
 
   }
 
-  override void beforeResponse(STRINGAA reqParameters) {
-    // debugMethodCall(moduleName!DCMSReadPageController~":DCMSReadPageController:beforeResponse(req, res)");
-    super.beforeResponse(reqParameters);       
-    if ("redirect" in reqParameters) return; 
+  override void beforeResponse(STRINGAA options = null) {
+    debugMethodCall(moduleName!DCMSBlogsUpdatePageController~":DCMSBlogsUpdatePageController::beforeResponse");
+    super.beforeResponse(options);
+    if (hasError || "redirect" in options) { return; }
 
-    auto appSession = getAppSession(reqParameters);
-  
-    auto selector = reqParameters.toEntitySelect;
-    // debug writeln(moduleName!DCMSReadPageController~":DCMSReadPageController::beforeResponse - Reading entity for selector ", selector);
-    auto entity = database[appSession.site.name, collectionName].findOne(selector);
+    if (auto appSession = getAppSession(options)) {
+      debug writeln("In DCMSCreateDCMSCreatePageControllerAction: appSession "~(appSession ? appSession.id : null));
+      if (auto tenant = database[appSession.site]) {
+        debug writeln("In DCMSCreatePageController: tenant "/* ~tenant.name */);
+
+        if (auto collection = tenant[collectionName]) {
+          debug writeln("In DCMSCreatePageController: collection "~collectionName);
+
+          auto entityId = options.get("entity_id", options.get("id", options.get("entityId", null)));
+          if (entityId.isUUID) {  
+            if (auto entity = collection.findOne(UUID(entityId))) {
+              if (auto entityView = cast(DAPPEntityCRUDView)this.view) {
+                entityView
+                  .entity(entity)
+                  .crudMode(CRUDModes.Read)
+                  .rootPath(this.rootPath)
+                  .readonly(true);
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
 mixin(APPPageControllerCalls!("CMSReadPageController"));

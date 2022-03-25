@@ -11,15 +11,23 @@ class DCMSCreateAction : DCMSAction {
     super.beforeResponse(options);
     if (hasError || "redirect" in options) { return; }    
 
-    if (auto entity = collection.createFromTemplate) {             
-      debug writeln("Created entity:", entity.id);
+    if (auto appSession = getAppSession(options)) {
+      debug writeln("In DCMSCreateAction: appSession "~(appSession ? appSession.id : null));
+      if (auto tenant = database[appSession.site]) {
+        debug writeln("In DCMSCreateAction: tenant "/* ~tenant.name */);
 
-      entity.fromRequest(options);
+        if (auto collection = tenant[collectionName]) {
+          debug writeln("In DCMSCreateAction: collection "~collectionName);
 
-      collection.insertOne(entity);
-      debug writeln("entity.id = ", entity.id);
+          if (auto entity = collection.createFromTemplate.fromRequest(options)) {   
+            debug writeln("In DCMSCreateAction: entity "~entity.name);
 
-      options["redirect"] = this.rootPath ~ "/view?id="~entity.id.toString; 
+            collection.insertOne(entity);
+            debug writeln("entity.id = ", entity.id);
+            options["redirect"] = this.rootPath ~ "/view?id="~entity.id.toString; 
+          }  
+        }
+      }
     }
 	}
 }

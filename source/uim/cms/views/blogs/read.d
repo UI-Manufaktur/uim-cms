@@ -10,30 +10,19 @@ class DCMSBlogsReadView : DAPPEntityReadView {
   override void initialize() {
     super.initialize;
 
-    this
-      .rootPath("/cms/blogs");
+    this.rootPath("/cms/blogs");
 
-    auto bc = BS5Breadcrumb(
-      BS5BreadcrumbList
-      .link(["href":"/cms"], "CMS")
-      .link(["href":rootPath], "Blogs")
-      .link(["href":rootPath], "Anzeigen")
-    );
-
-    this
-      .header(
-        PageHeader(this)
-          .breadcrumbs(bc)
-          .rootPath(rootPath)
-          .title(titleView("Blog anzeigen"))
-          .actions([["refresh", "list", "create"]])
-      );
+    if (auto pgHeader = cast(DPageHeader)this.header) {
+      pgHeader
+        .title(titleView("Blog anzeigen"))
+        .actions([["refresh", "list", "create"]])
+        .rootPath(this.rootPath);
+    }
 
     if (auto frm = cast(DForm)this.form) {
       frm
         .crudMode(this.crudMode)
-        .content(
-          CMSPostFormContent);
+        .content(CMSFormContent);
 
       if (auto frmHeader = cast(DFormHeader)frm.header) {
         frmHeader
@@ -50,10 +39,22 @@ class DCMSBlogsReadView : DAPPEntityReadView {
     auto headerTitle = "Blog ID:"~(this.entity ? this.entity.id.toString : " - Unbekannt -");
     auto bodyTitle = "Blog Name:";
 
+    if (auto pgHeader = cast(DPageHeader)this.header) {
+      pgHeader
+        .breadcrumbs(
+          BS5Breadcrumb(
+            BS5BreadcrumbList
+            .link(["href":"/cms"], "CMS")
+            .link(["href":rootPath], "Blogs")
+            .link(["active":"active", "href":rootPath~"/view?id="~(this.entity ? this.entity["id"] : " -missing-")], "Anzeigen")
+          )          
+        );
+    }
+
     this.form
       .parameter("headerTitle", headerTitle)
-      .parameter("bodyTitle", bodyTitle);
-      // .entity(this.entity);
+      .parameter("bodyTitle", bodyTitle)
+      .entity(this.entity);
   }
 }
 mixin(APPViewCalls!("CMSBlogsReadView"));

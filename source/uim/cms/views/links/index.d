@@ -10,46 +10,44 @@ class DCMSLinksIndexView : DAPPEntitiesListView {
   override void initialize() {
     super.initialize;
 
+    this.rootPath("/cms/links");
+
     auto bc = BS5Breadcrumb(
       BS5BreadcrumbList
       .link(["href":"/cms"], "CMS")
-      .link(["href":myRootPath], "Links")
+      .link(["href":this.rootPath], "Links")
     );
 
     auto headerTitle = titleList("Links");
     auto bodyTitle = "Gefundene Links";
 
-    if (auto header = cast(DPageHeader)this.header) {
-      header
-        .breadcrumbs(bc)
-        .rootPath(myRootPath)
-        .title(titleView("Übersicht Links"))
-        .actions([["refresh", "list", "create"]]);
-    }
-
-/*       .form(
-        APPEntitiesListForm
-          .rootPath(myRootPath));
- */
-/*       .form
-        .header(FormHeader// .rootPath(myRootPath)// .mainTitle("Links")// .subTitle("Links anzeigen").actions([["print", "export"]]))
-        .content(APPListFormContent// .rootPath(myRootPath));
-        
- */  }
+    this
+      .header(
+        PageHeader(this)
+          .breadcrumbs(bc)
+          .title(titleView("Übersicht Links"))
+          .actions([["refresh", "list", "create"]])
+          .rootPath(this.rootPath)
+      )
+      .form(
+        APPEntitiesListForm(this)
+          .header(
+            FormHeader
+              .mainTitle("Links")
+              .subTitle("Links anzeigen")
+              .actions([["print", "export"]]))
+          .content(EntitiesFormContent)
+          .rootPath(this.rootPath));
+  }
 
   override void beforeH5(STRINGAA options = null) {
     debugMethodCall(moduleName!DCMSLinksIndexView~":DCMSLinksIndexView("~this.name~")::beforeH5");
     super.beforeH5(options);
+    if (hasError || "redirect" in options) { return; }
 
     if (auto frm = cast(DForm)this.form) {
-      frm
-        .header(
-          FormHeader
-            .rootPath("/links")
-            .mainTitle("Links")
-            .subTitle("Übersicht Links")
-            .actions([["refresh"],["create"]]));
-    }
+      frm.entities(this.entities);
+    } 
   }
 
 /*   override DH5Obj[] toH5(STRINGAA options = null) {

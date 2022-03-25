@@ -13,7 +13,7 @@ class DCMSThemesIndexView : DAPPEntitiesListView {
     auto bc = BS5Breadcrumb(
       BS5BreadcrumbList
       .link(["href":"/cms"], "CMS")
-      .link(["href":myRootPath], "Themes")
+      .link(["href":this.rootPath], "Themes")
     );
 
     auto headerTitle = titleList("Themes");
@@ -44,16 +44,10 @@ class DCMSThemesIndexView : DAPPEntitiesListView {
     debugMethodCall(moduleName!DCMSThemesIndexView~":DCMSThemesIndexView("~this.name~")::beforeH5");
     super.beforeH5(options);
     if (hasError || "redirect" in options) { return; }
-    
+
     if (auto frm = cast(DForm)this.form) {
-      frm
-        .header(
-          FormHeader
-            .rootPath("/themes")
-            .mainTitle("Themes")
-            .subTitle("Übersicht Themes")
-            .actions([["refresh"],["create"]]));
-    }
+      frm.entities(this.entities);
+    } 
   }
 
 /*   override DH5Obj[] toH5(STRINGAA options = null) {

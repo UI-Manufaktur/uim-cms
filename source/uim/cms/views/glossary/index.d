@@ -10,46 +10,47 @@ class DCMSGlossaryIndexView : DAPPEntitiesListView {
   override void initialize() {
     super.initialize;
 
+    this.rootPath("/cms/glossary");
+
     auto bc = BS5Breadcrumb(
       BS5BreadcrumbList
       .link(["href":"/cms"], "CMS")
-      .link(["href":myRootPath], "Glossary")
+      .link(["href":this.rootPath], "Glossary")
     );
 
     auto headerTitle = titleList("Glossary");
     auto bodyTitle = "Gefundene Glossary";
 
+    auto headerTitle = titleList("Blogs");
+    auto bodyTitle = "Gefundene Blogs";
+
     this
       .header(
-        PageHeader(this).breadcrumbs(bc)// .rootPath(myRootPath).title(titleView("Übersicht Glossary")).actions(["refresh", "list", "create"]))
+        PageHeader(this)
+          .breadcrumbs(bc)
+          .title(titleView("Übersicht Glossary"))
+          .actions([["refresh", "list", "create"]])
+          .rootPath(this.rootPath)
       )
       .form(
         APPEntitiesListForm(this)
-          .rootPath(myRootPath)
           .header(
             FormHeader
-              .rootPath(myRootPath)
               .mainTitle("Glossary")
               .subTitle("Glossary anzeigen")
               .actions([["print", "export"]]))
-          .content(
-            APPListFormContent
-              .rootPath(myRootPath)));
+          .content(EntitiesFormContent)
+          .rootPath(this.rootPath));
   }
 
   override void beforeH5(STRINGAA options = null) {
     debugMethodCall(moduleName!DCMSGlossaryIndexView~":DCMSGlossaryIndexView("~this.name~")::beforeH5");
     super.beforeH5(options);
-
+    if (hasError || "redirect" in options) { return; }
+  
     if (auto frm = cast(DForm)this.form) {
-      frm
-        .header(
-          FormHeader
-            .rootPath("/glossary")
-            .mainTitle("Glossary")
-            .subTitle("Übersicht Glossary")
-            .actions([["refresh"],["create"]]));
-    }
+      frm.entities(this.entities);
+    } 
   }
 
 /*   override DH5Obj[] toH5(STRINGAA options = null) {

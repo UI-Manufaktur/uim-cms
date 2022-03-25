@@ -13,7 +13,7 @@ class DCMSGlossaryDeleteView : DAPPEntityDeleteView {
     auto bc = BS5Breadcrumb(
       BS5BreadcrumbList
       .link(["href":"/cms"], "CMS")
-      .link(["href":myRootPath], "Glossary")
+      .link(["href":this.rootPath], "Glossary")
     );
 
     if (auto header = cast(DPageHeader)this.header) {

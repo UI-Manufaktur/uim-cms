@@ -10,54 +10,49 @@ class DCMSBlogsCreateView : DAPPEntityCreateView {
   override void initialize() {
     super.initialize;
     
+    this.rootPath("/cms/blogs");
+
     auto bc = BS5Breadcrumb(
       BS5BreadcrumbList
       .link(["href":"/cms"], "CMS")
-      .link(["href":"/cms/blogs"], "Blogs")
-      .link(["href":"/cms/blogs/create", "active":"active"], "Create")
+      .link(["href":this.rootPath], "Blogs")
+      .link(["active"], ["href":this.rootPath~"/create", "aria-current":"page"], "Create")
     );
 
     if(auto header = cast(DPageHeader)this.header) {
       header
         .breadcrumbs(bc)
-        .rootPath(myRootPath)
-        .title(titleCreate("Blog erstellen"));
+        .title(titleCreate("Blog erstellen"))
+        .rootPath(this.rootPath);
     }
     
-    if (auto form = cast(DForm)this.form) {
-      form
-      .action(myRootPath~"/actions/create")
-      .rootPath(myRootPath);
+    if (auto frm = cast(DForm)this.form) {
+      frm
+        .action(this.rootPath~"/actions/create")
+        .content(CMSFormContent);
 
-      if (auto frmHeader = cast(DFormHeader)form.header) {
+      if (auto frmHeader = cast(DFormHeader)frm.header) {
         frmHeader
-          .rootPath(myRootPath)
           .mainTitle("Neuer Blog")
           .subTitle("Bitte Werte eingeben")
           .actions([["cancel","save"]]);
       }
-
-      form
-        .content(
-          CMSPostFormContent
-            .fields(["private", "name", "display", "description", "maintitle", "subtitle", "keywords", "image", "summary", "themes", "text"])); 
     }
   }
 
   override void beforeH5(STRINGAA options = null) {
     debugMethodCall(moduleName!DCMSBlogsCreateView~"::DCMSBlogsCreateView:beforeH5");
-    debug writeln("this.entity -> ", this.entity ? this.entity.id.toString : " 'null' " );
     super.beforeH5(options);
 
-    options["rootPath"] = myRootPath;
+    options["rootPath"] = this.rootPath;
 
     if (this.controller && this.controller.database) {
-      this.entity(this.controller.database["uim"]["blogs"].createFromTemplate);
+      this.entity(this.controller.database["uim"]["cms_blogs"].createFromTemplate);
     }
 
-    if (auto form = cast(DForm)this.components["form"]) {
-      form
-        .action("/cms/blogs/actions/create")
+    if (auto frm = cast(DForm)this.form) {
+      frm
+        .action(this.rootPath~"/actions/create")
         .entity(this.entity);
     }
   }

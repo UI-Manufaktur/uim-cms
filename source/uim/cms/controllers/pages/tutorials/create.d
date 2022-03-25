@@ -3,7 +3,7 @@ module uim.cms.controllers.pages.tutorials.create;
 @safe:
 import uim.cms;
 
-class DCMSTutorialsCreatePageController : DCMSPageController {
+class DCMSTutorialsCreatePageController : DCMSCreatePageController {
   mixin(APPPageControllerThis!("CMSTutorialsCreatePageController"));
 
   override void initialize() {
@@ -20,25 +20,9 @@ class DCMSTutorialsCreatePageController : DCMSPageController {
   })
 });`);
 
-  }
-
-  override void beforeResponse(STRINGAA options = null) {
-    debugMethodCall(moduleName!DCMSTutorialsUpdatePageController~":DCMSTutorialsUpdatePageController::beforeResponse");
-    super.beforeResponse(options);
-    if (hasError || "redirect" in options) { return; }
-
-    auto entityId = options.get("entity_id", options.get("id", options.get("entityId", null)));
-    if (entityId && entityId.isUUID && this.database) {  
-      auto dbEntity = database["uim", "cms_tutorials"].createFromTemplate;      
-      if (auto entityView = cast(DAPPEntityCRUDView)this.view) {
-        with(entityView) {
-          entity(dbEntity);
-          crudMode(CRUDModes.Create);
-          rootPath("/cms/tutorials");
-          readonly(true);
-        }
-      }
-    }
+    this
+      .rootPath("/cms/tutorials") 
+      .collectionName("cms_tutorials"); 
   }
 }
 mixin(APPPageControllerCalls!("CMSTutorialsCreatePageController"));

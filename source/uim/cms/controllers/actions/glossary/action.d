@@ -12,14 +12,8 @@ class DCMSGlossaryAction : DCMSAction {
 
     this
     .rootPath("/cms/glossary") 
-    .collectionName("glossary"); 
+    .collectionName("cms_glossary"); 
   }
-
-  override void beforeResponse(STRINGAA options = null) {
-    debugMethodCall(moduleName!DCMSGlossaryAction~":DCMSGlossaryAction::beforeResponse");
-    super.beforeResponse(options);
-    if (hasError || "redirect" in options) { return; }    
-	}
 }
 mixin(APPControllerCalls!("CMSGlossaryAction"));
 

@@ -14,12 +14,6 @@ class DCMSLinkAction : DCMSAction {
     .rootPath("/cms/links") 
     .collectionName("links"); 
   }
-
-  override void beforeResponse(STRINGAA options = null) {
-    debugMethodCall(moduleName!DCMSLinkAction~":DCMSLinkAction::beforeResponse");
-    super.beforeResponse(options);
-    if (hasError || "redirect" in options) { return; }    
-	}
 }
 mixin(APPControllerCalls!("CMSLinkAction"));
 

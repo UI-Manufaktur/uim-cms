@@ -10,10 +10,12 @@ class DCMSBlogsIndexView : DAPPEntitiesListView {
   override void initialize() {
     super.initialize;
 
+    this.rootPath("/cms/blogs");
+
     auto bc = BS5Breadcrumb(
       BS5BreadcrumbList
       .link(["href":"/cms"], "CMS")
-      .link(["href":"/cms/blogs"], "Blogs")
+      .link(["href":this.rootPath], "Blogs")
     );
 
     auto headerTitle = titleList("Blogs");
@@ -23,22 +25,19 @@ class DCMSBlogsIndexView : DAPPEntitiesListView {
       .header(
         PageHeader(this)
           .breadcrumbs(bc)
-          .rootPath(myRootPath)
           .title(titleView("Übersicht Blogs"))
           .actions([["refresh", "list", "create"]])
+          .rootPath(this.rootPath)
       )
       .form(
         APPEntitiesListForm(this)
-          .rootPath(myRootPath)
           .header(
             FormHeader
-              .rootPath(myRootPath)
               .mainTitle("Blogs")
               .subTitle("Blogs anzeigen")
               .actions([["print", "export"]]))
-          .content(
-            EntitiesFormContent
-              .rootPath(myRootPath)));      
+          .content(EntitiesFormContent)
+          .rootPath(this.rootPath));
   }
 
   override void beforeH5(STRINGAA options = null) {

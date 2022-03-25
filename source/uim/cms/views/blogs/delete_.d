@@ -10,29 +10,22 @@ class DCMSBlogsDeleteView : DAPPEntityDeleteView {
   override void initialize() {
     super.initialize;
 
-    auto bc = BS5Breadcrumb(
-      BS5BreadcrumbList
-      .link(["href":"/cms"], "CMS")
-      .link(["href":myRootPath], "Blogs")
-    );
+    this.rootPath("/cms/blogs");
 
     if (auto header = cast(DPageHeader)this.header) {
       header
-        .breadcrumbs(bc)
-        .rootPath(myRootPath)
-        .title(titleDelete("Blog löschen"));
+        .title(titleDelete("Blog löschen"))
+        .rootPath(this.rootPath);
     }
     
      if (auto frm = cast(DForm)this.form) {
       frm
-        .action("/cms/blogs/actions/delete")
-        .rootPath(myRootPath)
-        .content(
-          CMSPostFormContent);
+        .action(this.rootPath~"/actions/delete")
+        .content(CMSFormContent)
+        .rootPath(this.rootPath);
 
       if (auto frmHeader = cast(DFormHeader)frm.header) {
         frmHeader
-        .rootPath(myRootPath)
         .mainTitle("Blogs")
         .subTitle("Blogs löschen");
       }
@@ -46,6 +39,17 @@ class DCMSBlogsDeleteView : DAPPEntityDeleteView {
     auto headerTitle = "Blog ID:"~(this.entity ? this.entity.id.toString : " - Unbekannt -");
     auto bodyTitle = "Blog Name:";
 
+    if (auto pgHeader = cast(DPageHeader)this.header) {
+      pgHeader
+        .breadcrumbs(
+          BS5Breadcrumb(
+            BS5BreadcrumbList
+            .link(["href":"/cms"], "CMS")
+            .link(["href":rootPath], "Blogs")
+            .link(["active":"active", "href":rootPath~"/delete?id="~(this.entity ? this.entity["id"] : " -missing-")], "Löschen")
+          )          
+        );
+    }
 /*     if (auto frm = cast(DForm)this.form) {
       frm
         .action("/cms/blogs/actions/delete?entity_id="~(entity ? entity.id.toString : null))

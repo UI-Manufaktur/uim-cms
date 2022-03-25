@@ -12,7 +12,7 @@ class DCMSNewsAction : DCMSAction {
 
     this
     .rootPath("/cms/news") 
-    .collectionName("news"); 
+    .collectionName("cms_news"); 
   }
 
   override void beforeResponse(STRINGAA options = null) {

@@ -12,7 +12,7 @@ class DCMSBlogAction : DCMSAction {
 
     this
       .rootPath("/cms/blogs") 
-      .collectionName("blogs"); 
+      .collectionName("cms_blogs"); 
   }
 }
 mixin(APPControllerCalls!("CMSBlogAction"));

@@ -13,7 +13,7 @@ class DCMSGlossaryUpdateView : DAPPEntityUpdateView {
     auto bc = BS5Breadcrumb(
       BS5BreadcrumbList
       .link(["href":"/cms"], "CMS")
-      .link(["href":myRootPath], "Glossar")
+      .link(["href":this.rootPath], "Glossar")
     );
 
     if (auto header = cast(DPageHeader)this.header) {

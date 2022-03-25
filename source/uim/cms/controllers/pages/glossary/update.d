@@ -3,7 +3,7 @@ module uim.cms.controllers.pages.glossary.update;
 @safe:
 import uim.cms;
 
-class DCMSGlossaryUpdatePageController : DCMSPageController {
+class DCMSGlossaryUpdatePageController : DCMSUpdatePageController {
   mixin(APPPageControllerThis!("CMSGlossaryUpdatePageController"));
 
   override void initialize() {
@@ -22,28 +22,9 @@ class DCMSGlossaryUpdatePageController : DCMSPageController {
       })
     });`);
 
-  }
-
-  override void beforeResponse(STRINGAA options = null) {
-    debugMethodCall(moduleName!DCMSGlossaryUpdatePageController~":DCMSGlossaryUpdatePageController::beforeResponse");
-    super.beforeResponse(options);
-    if (hasError || "redirect" in options) { return; }
-
-    auto entityId = options.get("entity_id", null);
-    if (entityId && entityId.isUUID && this.database) {  
-      if (auto dbEntity = database["uim", "cms_glossary"].findOne(UUID(entityId))) {
-        
-        if (auto entityView = cast(DAPPEntityCRUDView)this.view) {
-
-          debug writeln("Setting entityView");
-          with(entityView) {
-            entity(dbEntity);
-            crudMode(CRUDModes.Update);
-            rootPath("/cms/glossary");
-          }
-        }
-      }
-    }
+    this
+      .rootPath("/cms/glossary") 
+      .collectionName("cms_glossary"); 
   }
 }
 mixin(APPPageControllerCalls!("CMSGlossaryUpdatePageController"));

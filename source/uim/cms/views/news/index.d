@@ -10,10 +10,12 @@ class DCMSNewsIndexView : DAPPEntitiesListView {
   override void initialize() {
     super.initialize;
 
+    this.rootPath("/cms/news");
+
     auto bc = BS5Breadcrumb(
       BS5BreadcrumbList
       .link(["href":"/cms"], "CMS")
-      .link(["href":myRootPath], "News")
+      .link(["href":this.rootPath], "News")
     );
 
     auto headerTitle = titleList("News");
@@ -23,22 +25,19 @@ class DCMSNewsIndexView : DAPPEntitiesListView {
       .header(
         PageHeader(this)
           .breadcrumbs(bc)
-          .rootPath(myRootPath)
-          .title(titleView("Übersicht News"))
-          .actions([["refresh", "list", "create"]]))
+          .title(titleView("Übersicht TuNewstorials"))
+          .actions([["refresh", "list", "create"]])
+          .rootPath(this.rootPath)
+      )
       .form(
         APPEntitiesListForm(this)
-          .rootPath(myRootPath) 
           .header(
             FormHeader
-              .rootPath(myRootPath)
               .mainTitle("News")
               .subTitle("News anzeigen")
               .actions([["print", "export"]]))
-          .content(
-            APPListFormContent
-              .rootPath(myRootPath)));
-        
+          .content(EntitiesFormContent)
+          .rootPath(this.rootPath));
    }
 
   override void beforeH5(STRINGAA options = null) {
@@ -47,14 +46,8 @@ class DCMSNewsIndexView : DAPPEntitiesListView {
     if (hasError || "redirect" in options) { return; }
 
     if (auto frm = cast(DForm)this.form) {
-      frm
-        .header(
-          FormHeader
-            .rootPath("/news")
-            .mainTitle("News")
-            .subTitle("Übersicht News")
-            .actions([["refresh"],["create"]]));
-    }
+      frm.entities(this.entities);
+    } 
   }
 
 /*   override DH5Obj[] toH5(STRINGAA options = null) {

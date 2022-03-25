@@ -11,15 +11,9 @@ class DCMSDocuAction : DCMSAction {
     super.initialize;
 
     this
-    .rootPath("/cms/docus") 
-    .collectionName("docus"); 
+      .rootPath("/cms/docus") 
+      .collectionName("cms_docus"); 
   }
-
-  override void beforeResponse(STRINGAA options = null) {
-    debugMethodCall(moduleName!DCMSDocuAction~":DCMSDocuAction("~this.name~")::beforeResponse");
-    super.beforeResponse(options);
-    if (hasError || "redirect" in options) { return; }    
-	}
 }
 mixin(APPControllerCalls!("CMSDocuAction"));
 

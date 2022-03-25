@@ -18,6 +18,6 @@ public import uim.cms.controllers.actions.themes;
 public import uim.cms.controllers.actions.tutorials;
 
 // Modules
-public import uim.cms.controllers.actions.tutorials.create;
-public import uim.cms.controllers.actions.tutorials.update;
-public import uim.cms.controllers.actions.tutorials.delete_;
+public import uim.cms.controllers.actions.create;
+public import uim.cms.controllers.actions.update;
+public import uim.cms.controllers.actions.delete_;

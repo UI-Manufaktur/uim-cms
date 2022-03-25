@@ -3,24 +3,15 @@ module uim.cms.controllers.actions.news.create;
 @safe:
 import uim.cms;
 
-class DCMSNewsCreateAction : DCMSNewsAction {
+class DCMSNewsCreateAction : DCMSCreateAction {
   mixin(APPControllerThis!("CMSNewsCreateAction"));
 
-  override void beforeResponse(STRINGAA options = null) {
-    debugMethodCall(moduleName!DCMSNewsCreateAction~":DCMSNewsCreateAction("~this.name~")::beforeResponse");
-    super.beforeResponse(options);
-    if (hasError || "redirect" in options) { return; }    
+  override void initialize() {
+    super.initialize;
 
-    auto appSession = getAppSession(options);
-
-    debug writeln(options);        
-    
-    auto tenant = database[appSession.site];
-    auto entity = tenant["news"].createFromTemplate.fromRequest(options);   
-    tenant["news"].insertOne(entity);
-    debug writeln("entity.id = ", entity.id);
-
-    options["redirect"] = this.rootPath ~ "/view?id="~entity.id.toString; 
-	}
+    this
+      .rootPath("/cms/news") 
+      .collectionName("cms_news"); 
+  }
 }
 mixin(APPControllerCalls!("CMSNewsCreateAction"));

@@ -3,7 +3,7 @@ module uim.cms.controllers.pages.pages.update;
 @safe:
 import uim.cms;
 
-class DCMSPagesUpdatePageController : DCMSPageController {
+class DCMSPagesUpdatePageController : DCMSUpdatePageController {
   mixin(APPPageControllerThis!("CMSPagesUpdatePageController"));
 
   override void initialize() {
@@ -18,28 +18,9 @@ class DCMSPagesUpdatePageController : DCMSPageController {
   })
 });`);
 
-  }
-
-  override void beforeResponse(STRINGAA options = null) {
-    debugMethodCall(moduleName!DCMSPagesUpdatePageController~":DCMSPagesUpdatePageController::beforeResponse");
-    super.beforeResponse(options);
-    if (hasError || "redirect" in options) { return; }
-
-    auto entityId = options.get("entity_id", null);
-    if (entityId && entityId.isUUID && this.database) {  
-      if (auto dbEntity = database["uim", "cms_pages"].findOne(UUID(entityId))) {
-        
-        if (auto entityView = cast(DAPPEntityCRUDView)this.view) {
-
-          debug writeln("Setting entityView");
-          with(entityView) {
-            entity(dbEntity);
-            crudMode(CRUDModes.Update);
-            rootPath("/cms/pages");
-          }
-        }
-      }
-    }
+    this
+      .rootPath("/cms/pages") 
+      .collectionName("cms_pages"); 
   }
 }
 mixin(APPPageControllerCalls!("CMSPagesUpdatePageController"));

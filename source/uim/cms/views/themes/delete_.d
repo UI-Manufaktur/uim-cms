@@ -13,7 +13,7 @@ class DCMSThemesDeleteView : DAPPEntityDeleteView {
     auto bc = BS5Breadcrumb(
       BS5BreadcrumbList
       .link(["href":"/cms"], "CMS")
-      .link(["href":myRootPath], "Themes")
+      .link(["href":this.rootPath], "Themes")
     );
 
 if (auto header = cast(DPageHeader)this.header) {

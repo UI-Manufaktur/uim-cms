@@ -3,7 +3,7 @@ module uim.cms.controllers.pages.blogs.delete_;
 @safe:
 import uim.cms;
 
-class DCMSBlogsDeletePageController : DCMSPageController {
+class DCMSBlogsDeletePageController : DCMSDeletePageController {
   mixin(APPPageControllerThis!("CMSBlogsDeletePageController"));
 
   override void initialize() {
@@ -19,26 +19,9 @@ class DCMSBlogsDeletePageController : DCMSPageController {
           "editorSummary.disabled();"~
           "editorText.disabled();"
         );
-
-  }
-
-  override void beforeResponse(STRINGAA options = null) {
-    debugMethodCall(moduleName!DCMSBlogsUpdatePageController~":DCMSBlogsUpdatePageController::beforeResponse");
-    super.beforeResponse(options);
-    if (hasError || "redirect" in options) { return; }
-
-    auto entityId = options.get("entity_id", options.get("id", options.get("entityId", null)));
-    if (entityId && entityId.isUUID && this.database) {  
-      auto dbEntity = database["uim", "cms_blogs"].findOne(UUID(entityId));      
-      if (auto entityView = cast(DAPPEntityCRUDView)this.view) {
-        with(entityView) {
-          entity(dbEntity);
-          crudMode(CRUDModes.Delete);
-          rootPath("/cms/blogs");
-          readonly(true);
-        }
-      }
-    }
+    this
+      .rootPath("/cms/blogs") 
+      .collectionName("cms_blogs");    
   }
 }
 mixin(APPPageControllerCalls!("CMSBlogsDeletePageController"));

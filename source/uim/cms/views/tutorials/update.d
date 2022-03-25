@@ -13,7 +13,7 @@ class DCMSTutorialsUpdateView : DAPPEntityUpdateView {
     auto bc = BS5Breadcrumb(
       BS5BreadcrumbList
       .link(["href":"/cms"], "CMS")
-      .link(["href":myRootPath], "Tutorials")
+      .link(["href":this.rootPath], "Tutorials")
     );
 
     this

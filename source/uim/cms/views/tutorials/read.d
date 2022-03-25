@@ -13,7 +13,7 @@ class DCMSTutorialsReadView : DAPPEntityReadView {
     auto bc = BS5Breadcrumb(
       BS5BreadcrumbList
       .link(["href":"/cms"], "CMS")
-      .link(["href":myRootPath], "Tutorials")
+      .link(["href":this.rootPath], "Tutorials")
     );
 
     if (auto header = cast(DPageHeader)this.header) {

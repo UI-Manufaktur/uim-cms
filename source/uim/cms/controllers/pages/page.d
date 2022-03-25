@@ -5,7 +5,9 @@ import uim.cms;
 
 class DCMSPageController : DAPPPageController {
   mixin(APPPageControllerThis!("CMSPageController"));
-  mixin(OProperty!("string", "entityName"));
+  
+  mixin(APPParameter!("entityName"));
+  mixin(APPParameter!("rootPath"));
 
   override void initialize() {
     super.initialize;

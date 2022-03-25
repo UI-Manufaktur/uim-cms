@@ -3,7 +3,7 @@ module uim.cms.controllers.pages.tutorials.update;
 @safe:
 import uim.cms;
 
-class DCMSTutorialsUpdatePageController : DCMSPageController {
+class DCMSTutorialsUpdatePageController : DCMSUpdatePageController {
   mixin(APPPageControllerThis!("CMSTutorialsUpdatePageController"));
 
   override void initialize() {
@@ -18,28 +18,9 @@ class DCMSTutorialsUpdatePageController : DCMSPageController {
   })
 });`);
 
-  }
-
-  override void beforeResponse(STRINGAA options = null) {
-    debugMethodCall(moduleName!DCMSTutorialsUpdatePageController~":DCMSTutorialsUpdatePageController::beforeResponse");
-    super.beforeResponse(options);
-    if (hasError || "redirect" in options) { return; }
-
-    auto entityId = options.get("entity_id", null);
-    if (entityId && entityId.isUUID && this.database) {  
-      if (auto dbEntity = database["uim", "cms_tutorials"].findOne(UUID(entityId))) {
-        
-        if (auto entityView = cast(DAPPEntityCRUDView)this.view) {
-
-          debug writeln("Setting entityView");
-          with(entityView) {
-            entity(dbEntity);
-            crudMode(CRUDModes.Update);
-            rootPath("/cms/tutorials");
-          }
-        }
-      }
-    }
+    this
+      .rootPath("/cms/tutorials") 
+      .collectionName("cms_tutorials"); 
   }
 }
 mixin(APPPageControllerCalls!("CMSTutorialsUpdatePageController"));

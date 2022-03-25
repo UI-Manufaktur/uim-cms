@@ -3,7 +3,7 @@ module uim.cms.controllers.pages.offers.update;
 @safe:
 import uim.cms;
 
-class DCMSOffersUpdatePageController : DCMSPageController {
+class DCMSOffersUpdatePageController : DCMSUpdatePageController {
   mixin(APPPageControllerThis!("CMSOffersUpdatePageController"));
 
   override void initialize() {
@@ -18,28 +18,9 @@ class DCMSOffersUpdatePageController : DCMSPageController {
   })
 });`);
 
-  }
-
-  override void beforeResponse(STRINGAA options = null) {
-    debugMethodCall(moduleName!DCMSOffersUpdatePageController~":DCMSOffersUpdatePageController::beforeResponse");
-    super.beforeResponse(options);
-    if (hasError || "redirect" in options) { return; }
-
-    auto entityId = options.get("entity_id", null);
-    if (entityId && entityId.isUUID && this.database) {  
-      if (auto dbEntity = database["uim", "cms_offers"].findOne(UUID(entityId))) {
-        
-        if (auto entityView = cast(DAPPEntityCRUDView)this.view) {
-
-          debug writeln("Setting entityView");
-          with(entityView) {
-            entity(dbEntity);
-            crudMode(CRUDModes.Update);
-            rootPath("/cms/offers");
-          }
-        }
-      }
-    }
+    this
+      .rootPath("/cms/offers") 
+      .collectionName("cms_offers"); 
   }
 }
 mixin(APPPageControllerCalls!("CMSOffersUpdatePageController"));

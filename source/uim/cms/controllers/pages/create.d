@@ -62,20 +62,31 @@ class DCMSCreatePageController : DCMSPageController {
       /// TODO
     }}
 
-  override void beforeResponse(STRINGAA reqParameters) {
-    // debugMethodCall(moduleName!DCMSCreatePageController~":DCMSCreatePageController::beforeResponse");
-    super.beforeResponse(reqParameters);   
-    if ("redirect" in reqParameters) return;
+  override void beforeResponse(STRINGAA options = null) {
+    debugMethodCall(moduleName!DCMSCreatePageController~":DCMSCreatePageController::beforeResponse");
+    super.beforeResponse(options);   
+    if (hasError || "redirect" in options) { return; }    
 
-    auto appSession = getAppSession(reqParameters);
-    // debug writeln(appSession.debugInfo); 
-      
-    auto site = appSession.site;
-    // debug writeln(moduleName!DCMSCreatePageController~":DCMSCreatePageController::beforeResponse - Looking for entities in ", site.name, ":", collectionName);
+    if (auto appSession = getAppSession(options)) {
+      debug writeln("In DCMSCreateDCMSCreatePageControllerAction: appSession "~(appSession ? appSession.id : null));
+      if (auto tenant = database[appSession.site]) {
+        debug writeln("In DCMSCreatePageController: tenant "/* ~tenant.name */);
 
-    auto poolId = uniform(1, 1_000_000_000);
-    if (auto ent = database[site.name, collectionName].createFromTemplate) entityPool[poolId] = ent;
-    reqParameters["poolId"] = to!string(poolId);
+        if (auto collection = tenant[collectionName]) {
+          debug writeln("In DCMSCreatePageController: collection "~collectionName);
+
+          if (auto entity = collection.createFromTemplate) {                            
+            if (auto entityView = cast(DAPPEntityCRUDView)this.view) {
+              entityView
+                .entity(entity)
+                .crudMode(CRUDModes.Create)
+                .rootPath(this.rootPath)
+                .readonly(true);
+            }          
+          }
+        }
+      }
+    }
   }
 }
 mixin(APPPageControllerCalls!("CMSCreatePageController"));

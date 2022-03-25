@@ -10,26 +10,26 @@ class DCMSDocusCreateView : DAPPEntityCreateView {
   override void initialize() {
     super.initialize;
     
+    this.rootPath("/cms/docus");
+
     auto bc = BS5Breadcrumb(
       BS5BreadcrumbList
       .link(["href":"/cms"], "CMS")
-      .link(["href":myRootPath], "Docus")
+      .link(["href":this.rootPath], "Docus")
+      .link(["active"], ["href":this.rootPath~"/create", "aria-current":"page"], "Create")
     );
 
     if (auto header = cast(DPageHeader)this.header) {
       header
         .breadcrumbs(bc)
-        .rootPath(myRootPath)
-        .title(titleCreate("Docu erstellen"));
+        .title(titleCreate("Docu erstellen"))
+        .rootPath(this.rootPath);
     }
 
     if (auto frm = cast(DForm)this.form) {
       frm
-      .action("/cms/docus/actions/create")
-      .rootPath(myRootPath)
-      .content(
-        CMSPostFormContent(frm)
-        .fields(["private", "name", "display", "description", "maintitle", "subtitle", "keywords", "image", "summary", "themes", "text"])); 
+        .action(this.rootPath~"/actions/create")
+        .content(CMSDocuFormContent); 
     
       if (auto frmHeader = cast(DFormHeader)frm.header) {
         frmHeader
@@ -52,7 +52,7 @@ class DCMSDocusCreateView : DAPPEntityCreateView {
  */
 
     if (this.controller && this.controller.database) {
-      this.entity(this.controller.database["uim"]["docus"].createFromTemplate);
+      this.entity(this.controller.database["uim"]["cms_docus"].createFromTemplate);
     }
 
     if (auto frm = cast(DForm)this.form) {
