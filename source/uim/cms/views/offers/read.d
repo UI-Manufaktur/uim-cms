@@ -7,33 +7,27 @@ import uim.cms.views.offers;
 class DCMSOffersReadView : DAPPEntityReadView {
   mixin(APPViewThis!("CMSOffersReadView"));
 
-  override void initialize() {
+override void initialize() {
     super.initialize;
 
-    auto bc = BS5Breadcrumb(
-      BS5BreadcrumbList
-      .link(["href":"/cms"], "CMS")
-      .link(["href":this.rootPath], "Offers")
-    );
+    this.rootPath("/cms/offers");
 
-    if (auto header = cast(DPageHeader)this.header) {
-      header
-        .breadcrumbs(bc)
-        .rootPath(myRootPath)
-        .title(titleView("Angebot anzeigen"));
+    if (auto pgHeader = cast(DPageHeader)this.header) {
+      pgHeader
+        .title(titleView("Offer anzeigen"))
+        .actions([["refresh", "list", "create"]])
+        .rootPath(this.rootPath);
     }
-    
+
     if (auto frm = cast(DForm)this.form) {
       frm
-      .rootPath(myRootPath)
-      .content(
-        CMSPostFormContent);
+        .crudMode(this.crudMode)
+        .content(CMSFormContent);
 
       if (auto frmHeader = cast(DFormHeader)frm.header) {
         frmHeader
-          .rootPath(myRootPath)
-          .mainTitle("Angebote")
-          .subTitle("Angebot anzeigen");
+          .mainTitle("Offers")
+          .subTitle("Offers anzeigen");
       }
     }
   }
@@ -43,15 +37,25 @@ class DCMSOffersReadView : DAPPEntityReadView {
     super.beforeH5(options);
     if (hasError || "redirect" in options) { return; }
 
-/*     auto headerTitle = "Offer ID:"~(this.entity ? this.entity.id.toString : " - Unbekannt -");
-    auto bodyTitle = "Offer Name:"; */
+    auto headerTitle = "Offer ID:"~(this.entity ? this.entity.id.toString : " - Unbekannt -");
+    auto bodyTitle = "Offer Name:";
 
-    if (auto frm = cast(DForm)this.form) {
-      frm
-/*         .headerTitle(headerTitle)
-      .bodyTitle(bodyTitle) */
-        .entity(this.entity);
+    if (auto pgHeader = cast(DPageHeader)this.header) {
+      pgHeader
+        .breadcrumbs(
+          BS5Breadcrumb(
+            BS5BreadcrumbList
+            .link(["href":"/cms"], "CMS")
+            .link(["href":this.rootPath], "Offers")
+            .link(["active":"active", "href":rootPath~"/view?id="~(this.entity ? this.entity["id"] : " -missing-")], "Anzeigen")
+          )          
+        );
     }
+
+    this.form
+      .parameter("headerTitle", headerTitle)
+      .parameter("bodyTitle", bodyTitle)
+      .entity(this.entity);
   }
 }
 mixin(APPViewCalls!("CMSOffersReadView"));

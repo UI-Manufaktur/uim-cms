@@ -35,6 +35,7 @@ class DCMSBlogsReadView : DAPPEntityReadView {
   override void beforeH5(STRINGAA options = null) {
     debugMethodCall(moduleName!DCMSBlogsReadView~"::DCMSBlogsReadView:beforeH5");
     super.beforeH5(options);
+    if (hasError || "redirect" in options) { return; }
 
     auto headerTitle = "Blog ID:"~(this.entity ? this.entity.id.toString : " - Unbekannt -");
     auto bodyTitle = "Blog Name:";
@@ -45,7 +46,7 @@ class DCMSBlogsReadView : DAPPEntityReadView {
           BS5Breadcrumb(
             BS5BreadcrumbList
             .link(["href":"/cms"], "CMS")
-            .link(["href":rootPath], "Blogs")
+            .link(["href":this.rootPath], "Blogs")
             .link(["active":"active", "href":rootPath~"/view?id="~(this.entity ? this.entity["id"] : " -missing-")], "Anzeigen")
           )          
         );

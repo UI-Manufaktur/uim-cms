@@ -10,47 +10,52 @@ class DCMSDocusReadView : DAPPEntityReadView {
   override void initialize() {
     super.initialize;
 
-    auto bc = BS5Breadcrumb(
-      BS5BreadcrumbList
-      .link(["href":"/cms"], "CMS")
-      .link(["href":this.rootPath], "Docus")
-    );
+    this.rootPath("/cms/docus");
 
-    if (auto header = cast(DPageHeader)this.header) {
-      header
-        .breadcrumbs(bc)
-      // .rootPath(myRootPath)
-      .title(titleView("Docu anzeigen"));
+    if (auto pgHeader = cast(DPageHeader)this.header) {
+      pgHeader
+        .title(titleView("Docu anzeigen"))
+        .actions([["refresh", "list", "create"]])
+        .rootPath(this.rootPath);
     }
 
     if (auto frm = cast(DForm)this.form) {
       frm
-        .rootPath(myRootPath)
-        .content(
-          CMSPostFormContent);
+        .crudMode(this.crudMode)
+        .content(CMSFormContent);
 
       if (auto frmHeader = cast(DFormHeader)frm.header) {
         frmHeader
-          .rootPath(myRootPath)
           .mainTitle("Docus")
           .subTitle("Docus anzeigen");
-      }   
-    }   
+      }
+    }
   }
 
   override void beforeH5(STRINGAA options = null) {
     debugMethodCall(moduleName!DCMSDocusReadView~"::DCMSDocusReadView:beforeH5");
     super.beforeH5(options);
+    if (hasError || "redirect" in options) { return; }
+    
+    auto headerTitle = "Docu ID:"~(this.entity ? this.entity.id.toString : " - Unbekannt -");
+    auto bodyTitle = "Docu Name:";
 
-/*     auto headerTitle = "Docu ID:"~(this.entity ? this.entity.id.toString : " - Unbekannt -");
-    auto bodyTitle = "Docu Name:"; */
-
-    if (auto frm = cast(DForm)this.form) {
-      frm
-/*       .headerTitle(headerTitle)
-      .bodyTitle(bodyTitle) */
-        .entity(this.entity);
+    if (auto pgHeader = cast(DPageHeader)this.header) {
+      pgHeader
+        .breadcrumbs(
+          BS5Breadcrumb(
+            BS5BreadcrumbList
+            .link(["href":"/cms"], "CMS")
+            .link(["href":this.rootPath], "Docus")
+            .link(["active":"active", "href":rootPath~"/view?id="~(this.entity ? this.entity["id"] : " -missing-")], "Anzeigen")
+          )          
+        );
     }
+
+    this.form
+      .parameter("headerTitle", headerTitle)
+      .parameter("bodyTitle", bodyTitle)
+      .entity(this.entity);
   }
 }
 mixin(APPViewCalls!("CMSDocusReadView"));

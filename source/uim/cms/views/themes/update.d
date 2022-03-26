@@ -10,31 +10,25 @@ class DCMSThemesUpdateView : DAPPEntityUpdateView {
   override void initialize() {
     super.initialize;
 
-    auto bc = BS5Breadcrumb(
-      BS5BreadcrumbList
-      .link(["href":"/cms"], "CMS")
-      .link(["href":this.rootPath], "Themes")
-    );
+    this
+      .rootPath("/cms/themes");
 
-    if (auto header = cast(DPageHeader)this.header) {
-      header
-        .breadcrumbs(bc)
-      // .rootPath(myRootPath)
-      .title(titleEdit("Theme bearbeiten"));
+    if (auto pgHeader = cast(DPageHeader)this.header) {
+      pgHeader
+        .title(titleEdit("Theme bearbeiten"))
+        .rootPath(this.rootPath);
     }
-    
+
     if (auto frm = cast(DForm)this.form) {
       frm
-        .action(myRootPath~"/actions/save")
-        .rootPath(myRootPath)
-        .content(
-          CMSPostFormContent);
+        .action("/cms/themes/actions/save")
+        .crudMode(CRUDModes.Update)
+        .content(CMSFormContent);
 
       if (auto frmHeader = cast(DFormHeader)frm.header) {
         frmHeader
-          .rootPath(myRootPath)
           .mainTitle("Themes")
-          .subTitle("Themes anzeigen");
+          .subTitle("Themes bearbeiten");
       }
     }
   }
@@ -42,16 +36,22 @@ class DCMSThemesUpdateView : DAPPEntityUpdateView {
   override void beforeH5(STRINGAA options = null) {
     debugMethodCall(moduleName!DCMSThemesUpdateView~"::DCMSThemesUpdateView:beforeH5");
     super.beforeH5(options);
-    if (hasError || "redirect" in options) { return; }
-/* 
-    auto headerTitle = "Theme ID:"~(this.entity ? this.entity.id.toString : " - Unbekannt -");
-    auto bodyTitle = "Theme Name:"; */
 
-    if (auto frm = cast(DForm)this.form) {
-      frm
-/*         .headerTitle(headerTitle)
-        .bodyTitle(bodyTitle) */
-        .entity(this.entity);
+    if (this.header) this.header.entity(this.entity);
+
+    auto headerTitle = "Theme ID:"~(this.entity ? this.entity.id.toString : " - Unbekannt -");
+    auto bodyTitle = "Theme Name:";
+
+    if (auto pgHeader = cast(DPageHeader)this.header) {
+      pgHeader
+        .breadcrumbs(
+          BS5Breadcrumb(
+            BS5BreadcrumbList
+            .link(["href":"/cms"], "CMS")
+            .link(["href":this.rootPath], "Themes")
+            .link(["active":"active", "href":rootPath~"/update?id="~(this.entity ? this.entity["id"] : " -missing-")], "Bearbeiten")
+          )          
+        );
     }
   }
 }

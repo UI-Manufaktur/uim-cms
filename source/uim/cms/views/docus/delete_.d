@@ -10,48 +10,45 @@ class DCMSDocusDeleteView : DAPPEntityDeleteView {
   override void initialize() {
     super.initialize;
 
-    auto bc = BS5Breadcrumb(
-      BS5BreadcrumbList
-      .link(["href":"/cms"], "CMS")
-      .link(["href":this.rootPath], "Docus")
-    );
+    this.rootPath("/cms/blogs");
 
     if (auto header = cast(DPageHeader)this.header) {
       header
-        .breadcrumbs(bc)
-        .rootPath(myRootPath)
-        .title(titleDelete("Docu löschen"));
+        .title(titleDelete("Blog löschen"))
+        .rootPath(this.rootPath);
     }
-
-    if (auto frm = cast(DForm)this.form) {
+    
+     if (auto frm = cast(DForm)this.form) {
       frm
-        .action("/cms/docus/actions/delete")
-        .rootPath(myRootPath)
-        .content(
-          CMSPostFormContent);
+        .action(this.rootPath~"/actions/delete")
+        .content(CMSFormContent)
+        .rootPath(this.rootPath);
 
       if (auto frmHeader = cast(DFormHeader)frm.header) {
         frmHeader
-          .rootPath(myRootPath)
-          .mainTitle("Docus")
-          .subTitle("Docus löschen");
+        .mainTitle("Blogs")
+        .subTitle("Blogs löschen");
       }
-    }
+    }    
   }
 
   override void beforeH5(STRINGAA options = null) {
-    debugMethodCall(moduleName!DCMSDocusDeleteView~"::DCMSDocusDeleteView:beforeH5");
+    debugMethodCall(moduleName!DCMSBlogsDeleteView~"::DCMSBlogsDeleteView:beforeH5");
     super.beforeH5(options);
 
-/*     auto headerTitle = "Docu ID:"~(this.entity ? this.entity.id.toString : " - Unbekannt -");
-    auto bodyTitle = "Docu Name:";
- */
-    if (auto frm = cast(DForm)this.form) {
-      frm
-        .action("/cms/docus/actions/delete?entity_id="~(entity ? entity.id.toString : null))
-        // .headerTitle(headerTitle)
-        // .bodyTitle(bodyTitle)
-        .entity(this.entity); 
+    auto headerTitle = "Blog ID:"~(this.entity ? this.entity.id.toString : " - Unbekannt -");
+    auto bodyTitle = "Blog Name:";
+
+    if (auto pgHeader = cast(DPageHeader)this.header) {
+      pgHeader
+        .breadcrumbs(
+          BS5Breadcrumb(
+            BS5BreadcrumbList
+            .link(["href":"/cms"], "CMS")
+            .link(["href":rootPath], "Blogs")
+            .link(["active":"active", "href":rootPath~"/delete?id="~(this.entity ? this.entity["id"] : " -missing-")], "Löschen")
+          )          
+        );
     }
   }
 }

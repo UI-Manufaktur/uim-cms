@@ -28,7 +28,7 @@ class DCMSBlogsUpdateView : DAPPEntityUpdateView {
       if (auto frmHeader = cast(DFormHeader)frm.header) {
         frmHeader
           .mainTitle("Blogs")
-          .subTitle("Blogs anzeigen");
+          .subTitle("Blogs bearbeiten");
       }
     }
   }
@@ -53,11 +53,6 @@ class DCMSBlogsUpdateView : DAPPEntityUpdateView {
           )          
         );
     }
-/*     if (auto frm = cast(DForm)this.form) {
-      frm
-        .headerTitle(headerTitle)
-      .bodyTitle(bodyTitle)
-      .entity(this.entity); */
   }
 }
 mixin(APPViewCalls!("CMSBlogsUpdateView"));

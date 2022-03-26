@@ -10,33 +10,26 @@ class DCMSGlossaryDeleteView : DAPPEntityDeleteView {
   override void initialize() {
     super.initialize;
 
-    auto bc = BS5Breadcrumb(
-      BS5BreadcrumbList
-      .link(["href":"/cms"], "CMS")
-      .link(["href":this.rootPath], "Glossary")
-    );
+    this.rootPath("/cms/glossary");
 
     if (auto header = cast(DPageHeader)this.header) {
       header
-        .breadcrumbs(bc)
-      // .rootPath(myRootPath)
-      .title(titleDelete("Glossary löschen"));
+        .title(titleDelete("Glossary löschen"))
+        .rootPath(this.rootPath);
     }
-
-    if (auto frm = cast(DForm)this.form) {
+    
+     if (auto frm = cast(DForm)this.form) {
       frm
-        .action(myRootPath~"/actions/delete")
-        .rootPath(myRootPath)
-        .content(
-          CMSPostFormContent);
+        .action(this.rootPath~"/actions/delete")
+        .content(CMSFormContent)
+        .rootPath(this.rootPath);
 
       if (auto frmHeader = cast(DFormHeader)frm.header) {
         frmHeader
-          .rootPath(myRootPath)
-          .mainTitle("Glossary")
-          .subTitle("Glossary löschen"); 
+        .mainTitle("Glossary")
+        .subTitle("Glossary löschen");
       }
-    }      
+    }    
   }
 
   override void beforeH5(STRINGAA options = null) {
@@ -46,12 +39,16 @@ class DCMSGlossaryDeleteView : DAPPEntityDeleteView {
     auto headerTitle = "Glossary ID:"~(this.entity ? this.entity.id.toString : " - Unbekannt -");
     auto bodyTitle = "Glossary Name:";
 
-    if (auto frm = cast(DForm)this.form) {
-      frm
-        .action(myRootPath~"/actions/delete?entity_id="~(entity ? entity.id.toString : null))
-        // headerTitle(headerTitle)
-        //.bodyTitle(bodyTitle)
-        .entity(this.entity);
+    if (auto pgHeader = cast(DPageHeader)this.header) {
+      pgHeader
+        .breadcrumbs(
+          BS5Breadcrumb(
+            BS5BreadcrumbList
+            .link(["href":"/cms"], "CMS")
+            .link(["href":rootPath], "Glossary")
+            .link(["active":"active", "href":rootPath~"/delete?id="~(this.entity ? this.entity["id"] : " -missing-")], "Löschen")
+          )          
+        );
     }
   }
 }

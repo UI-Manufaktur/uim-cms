@@ -10,48 +10,49 @@ class DCMSDocusUpdateView : DAPPEntityUpdateView {
   override void initialize() {
     super.initialize;
 
-    auto bc = BS5Breadcrumb(
-      BS5BreadcrumbList
-      .link(["href":"/cms"], "CMS")
-      .link(["href":this.rootPath], "Docus")
-    );
+    this
+      .rootPath("/cms/docus");
 
-    if (auto header = cast(DPageHeader)this.header) {
-      header
-        .breadcrumbs(bc)
-        .rootPath(myRootPath)
-        .title(titleEdit("Docu bearbeiten"));
+    if (auto pgHeader = cast(DPageHeader)this.header) {
+      pgHeader
+        .title(titleEdit("Docu bearbeiten"))
+        .rootPath(this.rootPath);
     }
 
     if (auto frm = cast(DForm)this.form) {
       frm
-      .action("/cms/docus/actions/save")
-      .crudMode(CRUDModes.Update)
-      .rootPath(myRootPath)
-      .content(
-        CMSPostFormContent);
+        .action("/cms/docus/actions/save")
+        .crudMode(CRUDModes.Update)
+        .content(CMSFormContent);
 
       if (auto frmHeader = cast(DFormHeader)frm.header) {
         frmHeader
-          .rootPath(myRootPath)
           .mainTitle("Docus")
           .subTitle("Docus anzeigen");
       }
-    }  
+    }
   }
 
   override void beforeH5(STRINGAA options = null) {
-    debugMethodCall(moduleName!DCMSDocusUpdateView~"::DCMSDocusUpdateView("~this.name~"):beforeH5");
+    debugMethodCall(moduleName!DCMSDocusUpdateView~"::DCMSDocusUpdateView:beforeH5");
     super.beforeH5(options);
+
+    if (this.header) this.header.entity(this.entity);
 
     auto headerTitle = "Docu ID:"~(this.entity ? this.entity.id.toString : " - Unbekannt -");
     auto bodyTitle = "Docu Name:";
 
-/*     if (auto frm = cast(DForm)this.form) {
-      frm
-        .headerTitle(headerTitle)
-      .bodyTitle(bodyTitle)
-      .entity(this.entity); */
+    if (auto pgHeader = cast(DPageHeader)this.header) {
+      pgHeader
+        .breadcrumbs(
+          BS5Breadcrumb(
+            BS5BreadcrumbList
+            .link(["href":"/cms"], "CMS")
+            .link(["href":this.rootPath], "Docus")
+            .link(["active":"active", "href":rootPath~"/update?id="~(this.entity ? this.entity["id"] : " -missing-")], "Bearbeiten")
+          )          
+        );
+    }
   }
 }
 mixin(APPViewCalls!("CMSDocusUpdateView"));

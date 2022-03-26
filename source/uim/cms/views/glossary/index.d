@@ -21,9 +21,6 @@ class DCMSGlossaryIndexView : DAPPEntitiesListView {
     auto headerTitle = titleList("Glossary");
     auto bodyTitle = "Gefundene Glossary";
 
-    auto headerTitle = titleList("Blogs");
-    auto bodyTitle = "Gefundene Blogs";
-
     this
       .header(
         PageHeader(this)

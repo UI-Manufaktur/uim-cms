@@ -10,48 +10,45 @@ class DCMSPagesDeleteView : DAPPEntityDeleteView {
   override void initialize() {
     super.initialize;
 
-    auto bc = BS5Breadcrumb(
-      BS5BreadcrumbList
-      .link(["href":"/cms"], "CMS")
-      .link(["href":this.rootPath], "Pages")
-    );
+    this.rootPath("/cms/pages");
 
-    this
-      .header(
-        PageHeader(this)
-          .breadcrumbs(bc)
-          .rootPath(myRootPath)
-          .title(titleDelete("Page löschen"))
-          .actions([["refresh", "list", "create"]]))
-      .form(
-        Form(this)
-          .action(myRootPath~"/actions/delete")
-          .crudMode(CRUDModes.Delete)
-          .rootPath(myRootPath)
-          .header(
-            FormHeader
-            .rootPath(myRootPath)
-            .mainTitle("Pages")
-            .subTitle("Pages löschen")
-            .actions([["cancel2root", "finalDelete"], ["view", "version", "edit"], ["print", "export"]]))
-          .content(
-            CMSPostFormContent));
+    if (auto header = cast(DPageHeader)this.header) {
+      header
+        .title(titleDelete("Page löschen"))
+        .rootPath(this.rootPath);
+    }
+    
+     if (auto frm = cast(DForm)this.form) {
+      frm
+        .action(this.rootPath~"/actions/delete")
+        .content(CMSFormContent)
+        .rootPath(this.rootPath);
+
+      if (auto frmHeader = cast(DFormHeader)frm.header) {
+        frmHeader
+        .mainTitle("Pages")
+        .subTitle("Pages löschen");
+      }
+    }    
   }
 
   override void beforeH5(STRINGAA options = null) {
     debugMethodCall(moduleName!DCMSPagesDeleteView~"::DCMSPagesDeleteView:beforeH5");
     super.beforeH5(options);
-    if (hasError || "redirect" in options) { return; }
 
-/*     auto headerTitle = "Page ID:"~(this.entity ? this.entity.id.toString : " - Unbekannt -");
-    auto bodyTitle = "Page Name:"; */
+    auto headerTitle = "Page ID:"~(this.entity ? this.entity.id.toString : " - Unbekannt -");
+    auto bodyTitle = "Page Name:";
 
-    if (auto frm = cast(DForm)this.form) {
-      frm
-        .action(myRootPath~"/actions/delete?entity_id="~(entity ? entity.id.toString : null))
-/*         .headerTitle(headerTitle)
-        .bodyTitle(bodyTitle) */
-        .entity(this.entity);
+    if (auto pgHeader = cast(DPageHeader)this.header) {
+      pgHeader
+        .breadcrumbs(
+          BS5Breadcrumb(
+            BS5BreadcrumbList
+            .link(["href":"/cms"], "CMS")
+            .link(["href":rootPath], "Pages")
+            .link(["active":"active", "href":rootPath~"/delete?id="~(this.entity ? this.entity["id"] : " -missing-")], "Löschen")
+          )          
+        );
     }
   }
 }

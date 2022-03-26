@@ -10,47 +10,49 @@ class DCMSLinksUpdateView : DAPPEntityUpdateView {
   override void initialize() {
     super.initialize;
 
-    auto bc = BS5Breadcrumb(
-      BS5BreadcrumbList
-      .link(["href":"/cms"], "CMS")
-      .link(["href":this.rootPath], "Links")
-    );
+    this
+      .rootPath("/cms/links");
 
-    if (auto header = cast(DPageHeader)this.header) {
-      header
-        .breadcrumbs(bc)
-      // .rootPath(myRootPath)
-      .title(titleEdit("Link bearbeiten"));
+    if (auto pgHeader = cast(DPageHeader)this.header) {
+      pgHeader
+        .title(titleEdit("Link bearbeiten"))
+        .rootPath(this.rootPath);
     }
 
     if (auto frm = cast(DForm)this.form) {
       frm
-      .action(myRootPath~"/actions/save")
-      .rootPath(myRootPath)
-      .content(
-        CMSPostFormContent);
+        .action("/cms/links/actions/save")
+        .crudMode(CRUDModes.Update)
+        .content(CMSFormContent);
 
       if (auto frmHeader = cast(DFormHeader)frm.header) {
         frmHeader
-          .rootPath(myRootPath)
           .mainTitle("Links")
-          .subTitle("Links anzeigen");
+          .subTitle("Links bearbeiten");
       }
-    }      
+    }
   }
 
   override void beforeH5(STRINGAA options = null) {
     debugMethodCall(moduleName!DCMSLinksUpdateView~"::DCMSLinksUpdateView:beforeH5");
     super.beforeH5(options);
-    if (hasError || "redirect" in options) { return; }
+
+    if (this.header) this.header.entity(this.entity);
 
     auto headerTitle = "Link ID:"~(this.entity ? this.entity.id.toString : " - Unbekannt -");
     auto bodyTitle = "Link Name:";
 
-    this.form
-      //.headerTitle(headerTitle)
-      // .bodyTitle(bodyTitle)
-      .entity(this.entity);
+    if (auto pgHeader = cast(DPageHeader)this.header) {
+      pgHeader
+        .breadcrumbs(
+          BS5Breadcrumb(
+            BS5BreadcrumbList
+            .link(["href":"/cms"], "CMS")
+            .link(["href":this.rootPath], "Links")
+            .link(["active":"active", "href":rootPath~"/update?id="~(this.entity ? this.entity["id"] : " -missing-")], "Bearbeiten")
+          )          
+        );
+    }
   }
 }
 mixin(APPViewCalls!("CMSLinksUpdateView"));

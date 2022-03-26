@@ -7,33 +7,27 @@ import uim.cms.views.links;
 class DCMSLinksReadView : DAPPEntityReadView {
   mixin(APPViewThis!("CMSLinksReadView"));
 
-  override void initialize() {
+override void initialize() {
     super.initialize;
 
-    auto bc = BS5Breadcrumb(
-      BS5BreadcrumbList
-      .link(["href":"/cms"], "CMS")
-      .link(["href":this.rootPath], "Links")
-    );
+    this.rootPath("/cms/links");
 
-    if (auto header = cast(DPageHeader)this.header) {
-      header
-        .breadcrumbs(bc)
-        .rootPath(myRootPath)
-        .title(titleView("Link anzeigen"));
+    if (auto pgHeader = cast(DPageHeader)this.header) {
+      pgHeader
+        .title(titleView("Link anzeigen"))
+        .actions([["refresh", "list", "create"]])
+        .rootPath(this.rootPath);
     }
 
     if (auto frm = cast(DForm)this.form) {
       frm
-        .rootPath(myRootPath)
-        .content(
-          CMSPostFormContent);
+        .crudMode(this.crudMode)
+        .content(CMSFormContent);
 
       if (auto frmHeader = cast(DFormHeader)frm.header) {
         frmHeader
-          .rootPath(myRootPath)
-          .mainTitle("Link")
-          .subTitle("Link anzeigen");
+          .mainTitle("Links")
+          .subTitle("Links anzeigen");
       }
     }
   }
@@ -41,16 +35,27 @@ class DCMSLinksReadView : DAPPEntityReadView {
   override void beforeH5(STRINGAA options = null) {
     debugMethodCall(moduleName!DCMSLinksReadView~"::DCMSLinksReadView:beforeH5");
     super.beforeH5(options);
+    if (hasError || "redirect" in options) { return; }
 
-/*     auto headerTitle = "Link ID:"~(this.entity ? this.entity.id.toString : " - Unbekannt -");
-    auto bodyTitle = "Link Name:"; */
+    auto headerTitle = "Link ID:"~(this.entity ? this.entity.id.toString : " - Unbekannt -");
+    auto bodyTitle = "Link Name:";
 
-    if (auto frm = cast(DForm)this.form) {
-      frm
-        //.headerTitle(headerTitle)
-        // .bodyTitle(bodyTitle)
-        .entity(this.entity);
+    if (auto pgHeader = cast(DPageHeader)this.header) {
+      pgHeader
+        .breadcrumbs(
+          BS5Breadcrumb(
+            BS5BreadcrumbList
+            .link(["href":"/cms"], "CMS")
+            .link(["href":this.rootPath], "Links")
+            .link(["active":"active", "href":rootPath~"/view?id="~(this.entity ? this.entity["id"] : " -missing-")], "Anzeigen")
+          )          
+        );
     }
+
+    this.form
+      .parameter("headerTitle", headerTitle)
+      .parameter("bodyTitle", bodyTitle)
+      .entity(this.entity);
   }
 }
 mixin(APPViewCalls!("CMSLinksReadView"));

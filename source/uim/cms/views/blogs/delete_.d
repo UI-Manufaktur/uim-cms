@@ -50,12 +50,6 @@ class DCMSBlogsDeleteView : DAPPEntityDeleteView {
           )          
         );
     }
-/*     if (auto frm = cast(DForm)this.form) {
-      frm
-        .action("/cms/blogs/actions/delete?entity_id="~(entity ? entity.id.toString : null))
-      .headerTitle(headerTitle)
-      .bodyTitle(bodyTitle)
-      .entity(this.entity); */
   }
 }
 mixin(APPViewCalls!("CMSBlogsDeleteView"));
