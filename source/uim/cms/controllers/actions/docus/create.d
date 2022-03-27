@@ -3,7 +3,7 @@ module uim.cms.controllers.actions.docus.create;
 @safe:
 import uim.cms;
 
-class DCMSDocuCreateAction : DCMSCreateAction {
+/* class DCMSDocuCreateAction : DCMSCreateAction {
   mixin(APPControllerThis!("CMSDocuCreateAction"));
 
   override void initialize() {
@@ -14,4 +14,4 @@ class DCMSDocuCreateAction : DCMSCreateAction {
     .collectionName("cms_docus"); 
   }
 }
-mixin(APPControllerCalls!("CMSDocuCreateAction"));
+mixin(APPControllerCalls!("CMSDocuCreateAction")); */

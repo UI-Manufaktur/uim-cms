@@ -3,7 +3,7 @@ module uim.cms.controllers.actions.blogs.delete_;
 @safe:
 import uim.cms;
 
-class DCMSBlogDeleteAction : DCMSDeleteAction {
+/* class DCMSBlogDeleteAction : DCMSDeleteAction {
   mixin(APPControllerThis!("CMSBlogDeleteAction"));
 
   override void initialize() {
@@ -15,3 +15,4 @@ class DCMSBlogDeleteAction : DCMSDeleteAction {
   }
 }
 mixin(APPControllerCalls!("CMSBlogDeleteAction"));
+ */

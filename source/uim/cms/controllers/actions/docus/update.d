@@ -3,7 +3,7 @@ module uim.cms.controllers.actions.docus.update;
 @safe:
 import uim.cms;
 
-class DCMSDocuUpdateAction : DCMSUpdateAction {
+/* class DCMSDocuUpdateAction : DCMSUpdateAction {
   mixin(APPControllerThis!("CMSDocuUpdateAction"));
 
   override void initialize() {
@@ -15,3 +15,4 @@ class DCMSDocuUpdateAction : DCMSUpdateAction {
   }
 }
 mixin(APPControllerCalls!("CMSDocuUpdateAction"));
+ */

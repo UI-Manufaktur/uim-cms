@@ -2,7 +2,7 @@ module uim.cms.controllers.actions.docus.delete_;
 
 @safe:
 import uim.cms;
-
+/* 
 class DCMSDocuDeleteAction : DCMSDeleteAction {
   mixin(APPControllerThis!("CMSDocuDeleteAction"));
 
@@ -14,4 +14,4 @@ class DCMSDocuDeleteAction : DCMSDeleteAction {
     .collectionName("cms_docus"); 
   }
 }
-mixin(APPControllerCalls!("CMSDocuDeleteAction"));
+mixin(APPControllerCalls!("CMSDocuDeleteAction")); */

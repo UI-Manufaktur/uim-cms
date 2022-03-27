@@ -3,7 +3,7 @@ module uim.cms.controllers.actions.blogs.update;
 @safe:
 import uim.cms;
 
-class DCMSBlogUpdateAction : DCMSUpdateAction {
+/* class DCMSBlogUpdateAction : DCMSUpdateAction {
   mixin(APPControllerThis!("CMSBlogUpdateAction"));
 
   override void initialize() {
@@ -15,3 +15,4 @@ class DCMSBlogUpdateAction : DCMSUpdateAction {
   }
 }
 mixin(APPControllerCalls!("CMSBlogUpdateAction"));
+ */

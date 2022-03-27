@@ -3,7 +3,7 @@ module uim.cms.controllers.actions.blogs.create;
 @safe:
 import uim.cms;
 
-class DCMSBlogCreateAction : DCMSCreateAction {
+/* class DCMSBlogCreateAction : DCMSCreateAction {
   mixin(APPControllerThis!("CMSBlogCreateAction"));
 
   override void initialize() {
@@ -15,3 +15,4 @@ class DCMSBlogCreateAction : DCMSCreateAction {
   }
 }
 mixin(APPControllerCalls!("CMSBlogCreateAction"));
+ */

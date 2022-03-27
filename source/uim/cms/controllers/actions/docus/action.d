@@ -4,7 +4,7 @@ module uim.cms.controllers.actions.docus.action;
 @safe:
 import uim.cms;
 
-class DCMSDocuAction : DCMSAction {
+/* class DCMSDocuAction : DCMSAction {
  mixin(APPControllerThis!("CMSDocuAction"));
 
   override void initialize() {
@@ -21,4 +21,4 @@ version(test_uim_cms) {
   unittest {
     testController(CMSDocuAction);
   }
-}
+} */
