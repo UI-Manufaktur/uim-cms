@@ -46,7 +46,7 @@ class DCMSDocusDeleteView : DAPPEntityDeleteView {
             BS5BreadcrumbList
             .link(["href":"/cms"], "CMS")
             .link(["href":rootPath], "Blogs")
-            .link(["active":"active", "href":rootPath~"/delete?id="~(this.entity ? this.entity["id"] : " -missing-")], "Löschen")
+            .item(["active", "fw-bold"], ["href":rootPath~"/delete?id="~(this.entity ? this.entity["id"] : " -missing-")], "Löschen")
           )          
         );
     }

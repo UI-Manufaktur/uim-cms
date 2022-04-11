@@ -16,7 +16,7 @@ class DCMSGlossaryCreateView : DAPPEntityCreateView {
       BS5BreadcrumbList
       .link(["href":"/cms"], "CMS")
       .link(["href":this.rootPath], "Glossary")
-      .link(["active"], ["href":this.rootPath~"/create", "aria-current":"page"], "Create")
+      .item(["active"], ["href":this.rootPath~"/create", "aria-current":"page"], "Create")
     );
 
     if(auto myHeader = cast(DPageHeader)this.header) {

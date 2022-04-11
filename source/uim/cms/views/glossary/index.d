@@ -21,6 +21,12 @@ class DCMSGlossaryIndexView : DAPPEntitiesListView {
     auto headerTitle = titleList("Glossary");
     auto bodyTitle = "Gefundene Glossary";
 
+    auto myForm = APPEntitiesListForm(this)
+      .header(
+        FormHeader
+          .mainTitle("Glossary")
+          .subTitle("Glossary anzeigen")
+          .actions([["print", "export"]]));
     this
       .header(
         PageHeader(this)
@@ -30,12 +36,7 @@ class DCMSGlossaryIndexView : DAPPEntitiesListView {
           .rootPath(this.rootPath)
       )
       .form(
-        APPEntitiesListForm(this)
-          .header(
-            FormHeader
-              .mainTitle("Glossary")
-              .subTitle("Glossary anzeigen")
-              .actions([["print", "export"]]))
+        myForm
           .content(EntitiesFormContent(myForm))
           .rootPath(this.rootPath));
   }

@@ -14,19 +14,19 @@ class DCMSLinksUpdateView : DAPPEntityUpdateView {
       .rootPath("/cms/links");
 
     if (auto myHeader = cast(DPageHeader)this.header) {
-      pgHeader
+      myHeader
         .title(titleEdit("Link bearbeiten"))
         .rootPath(this.rootPath);
     }
 
     if (auto myForm = cast(DForm)this.form) {
-      frm
+      myForm
         .action("/cms/links/actions/save")
         .crudMode(CRUDModes.Update)
         .content(CMSFormContent(myForm));
 
       if (auto myFormHeader = cast(DFormHeader)myForm.header) {
-        frmHeader
+        myFormHeader
           .mainTitle("Links")
           .subTitle("Links bearbeiten");
       }
@@ -43,13 +43,14 @@ class DCMSLinksUpdateView : DAPPEntityUpdateView {
     auto bodyTitle = "Link Name:";
 
     if (auto myHeader = cast(DPageHeader)this.header) {
-      pgHeader
+      myHeader
         .breadcrumbs(
           BS5Breadcrumb(
             BS5BreadcrumbList
+            .link(["href":"/"], "UIM")
             .link(["href":"/cms"], "CMS")
             .link(["href":this.rootPath], "Links")
-            .link(["active":"active", "href":rootPath~"/update?id="~(this.entity ? this.entity["id"] : " -missing-")], "Bearbeiten")
+            .item(["active", "fw-bold"], ["href":rootPath~"/update?id="~(this.entity ? this.entity["id"] : " -missing-")], "Bearbeiten")
           )          
         );
     }

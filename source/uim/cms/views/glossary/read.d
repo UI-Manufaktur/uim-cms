@@ -47,7 +47,7 @@ override void initialize() {
             BS5BreadcrumbList
             .link(["href":"/cms"], "CMS")
             .link(["href":this.rootPath], "Glossary")
-            .link(["active":"active", "href":rootPath~"/view?id="~(this.entity ? this.entity["id"] : " -missing-")], "Anzeigen")
+            .item(["active", "fw-bold"], ["href":rootPath~"/view?id="~(this.entity ? this.entity["id"] : " -missing-")], "Anzeigen")
           )          
         );
     }

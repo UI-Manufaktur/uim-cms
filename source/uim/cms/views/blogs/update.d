@@ -21,7 +21,7 @@ class DCMSBlogsUpdateView : DAPPEntityUpdateView {
 
     if (auto myForm = cast(DForm)this.form) {
       myForm
-        .action("/cms/blogs/actions/save")
+        .action(this.rootPath~"/actions/save")
         .crudMode(CRUDModes.Update)
         .content(CMSFormContent(myForm));
 
@@ -47,9 +47,10 @@ class DCMSBlogsUpdateView : DAPPEntityUpdateView {
         .breadcrumbs(
           BS5Breadcrumb(
             BS5BreadcrumbList
+            .link(["href":"/"], "UIM")
             .link(["href":"/cms"], "CMS")
             .link(["href":this.rootPath], "Blogs")
-            .link(["active":"active", "href":rootPath~"/update?id="~(this.entity ? this.entity["id"] : " -missing-")], "Bearbeiten")
+            .item(["active", "fw-bold"], ["href":rootPath~"/update?id="~(this.entity ? this.entity["id"] : " -missing-")], "Bearbeiten")
           )          
         );
     }

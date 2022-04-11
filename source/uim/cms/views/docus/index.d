@@ -21,6 +21,12 @@ class DCMSDocusIndexView : DAPPEntitiesListView {
     auto headerTitle = titleList("Docus");
     auto bodyTitle = "Gefundene Docus";
 
+    auto myForm = APPEntitiesListForm(this)
+          .header(
+            FormHeader
+              .mainTitle("Docus")
+              .subTitle("Docus anzeigen")
+              .actions([["print", "export"]]));
     this
       .header(
         PageHeader(this)
@@ -30,12 +36,7 @@ class DCMSDocusIndexView : DAPPEntitiesListView {
           .rootPath(this.rootPath)
       )
       .form(
-        APPEntitiesListForm(this)
-          .header(
-            FormHeader
-              .mainTitle("Docus")
-              .subTitle("Docus anzeigen")
-              .actions([["print", "export"]]))
+        myForm
           .content(EntitiesFormContent(myForm))
           .rootPath(this.rootPath));
 

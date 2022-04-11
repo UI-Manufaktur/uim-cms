@@ -14,19 +14,19 @@ class DCMSThemesUpdateView : DAPPEntityUpdateView {
       .rootPath("/cms/themes");
 
     if (auto myHeader = cast(DPageHeader)this.header) {
-      pgHeader
+      myHeader
         .title(titleEdit("Theme bearbeiten"))
         .rootPath(this.rootPath);
     }
 
     if (auto myForm = cast(DForm)this.form) {
-      frm
+      myForm
         .action("/cms/themes/actions/save")
         .crudMode(CRUDModes.Update)
         .content(CMSFormContent(myForm));
 
       if (auto myFormHeader = cast(DFormHeader)myForm.header) {
-        frmHeader
+        myFormHeader
           .mainTitle("Themes")
           .subTitle("Themes bearbeiten");
       }
@@ -43,13 +43,14 @@ class DCMSThemesUpdateView : DAPPEntityUpdateView {
     auto bodyTitle = "Theme Name:";
 
     if (auto myHeader = cast(DPageHeader)this.header) {
-      pgHeader
+      myHeader
         .breadcrumbs(
           BS5Breadcrumb(
             BS5BreadcrumbList
+            .link(["href":"/"], "UIM")
             .link(["href":"/cms"], "CMS")
             .link(["href":this.rootPath], "Themes")
-            .link(["active":"active", "href":rootPath~"/update?id="~(this.entity ? this.entity["id"] : " -missing-")], "Bearbeiten")
+            .item(["active", "fw-bold"], ["href":rootPath~"/update?id="~(this.entity ? this.entity["id"] : " -missing-")], "Bearbeiten")
           )          
         );
     }

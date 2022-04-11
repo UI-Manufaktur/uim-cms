@@ -14,7 +14,7 @@ class DCMSFormGroupSummary : DAPPTextAreaFormGroup {
     .name("entity_summary")
     .inputName("entity_summary")
     .fieldName("summary")
-    .label("Zusammenfassung"); ; 
+    .label("Zusammenfassung");  
   }
 }
 mixin(FormComponentCalls!("CMSFormGroupSummary", true));

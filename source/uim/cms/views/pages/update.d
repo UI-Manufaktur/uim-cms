@@ -14,19 +14,19 @@ class DCMSPagesUpdateView : DAPPEntityUpdateView {
       .rootPath("/cms/pages");
 
     if (auto myHeader = cast(DPageHeader)this.header) {
-      pgHeader
+      myHeader
         .title(titleEdit("Page bearbeiten"))
         .rootPath(this.rootPath);
     }
 
     if (auto myForm = cast(DForm)this.form) {
-      frm
+      myForm
         .action("/cms/pages/actions/save")
         .crudMode(CRUDModes.Update)
         .content(CMSFormContent(myForm));
 
       if (auto myFormHeader = cast(DFormHeader)myForm.header) {
-        frmHeader
+        myFormHeader
           .mainTitle("Pages")
           .subTitle("Pages bearbeiten");
       }
@@ -49,7 +49,7 @@ class DCMSPagesUpdateView : DAPPEntityUpdateView {
             BS5BreadcrumbList
             .link(["href":"/cms"], "CMS")
             .link(["href":this.rootPath], "Pages")
-            .link(["active":"active", "href":rootPath~"/update?id="~(this.entity ? this.entity["id"] : " -missing-")], "Bearbeiten")
+            .item(["active", "fw-bold"], ["href":rootPath~"/update?id="~(this.entity ? this.entity["id"] : " -missing-")], "Bearbeiten")
           )          
         );
     }

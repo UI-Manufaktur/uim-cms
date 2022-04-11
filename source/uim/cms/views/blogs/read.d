@@ -41,13 +41,14 @@ class DCMSBlogsReadView : DAPPEntityReadView {
     auto bodyTitle = "Blog Name:";
 
     if (auto myHeader = cast(DPageHeader)this.header) {
-      pgHeader
+      myHeader
         .breadcrumbs(
           BS5Breadcrumb(
             BS5BreadcrumbList
+            .link(["href":"/"], "UIM")
             .link(["href":"/cms"], "CMS")
             .link(["href":this.rootPath], "Blogs")
-            .link(["active":"active", "href":rootPath~"/view?id="~(this.entity ? this.entity["id"] : " -missing-")], "Anzeigen")
+            .item(["active", "fw-bold"], ["href":rootPath~"/view?id="~(this.entity ? this.entity["id"] : " -missing-")], "Anzeigen")
           )          
         );
     }

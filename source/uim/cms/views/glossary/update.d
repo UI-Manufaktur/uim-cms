@@ -14,7 +14,7 @@ class DCMSGlossaryUpdateView : DAPPEntityUpdateView {
       .rootPath("/cms/glossarys");
 
     if (auto myHeader = cast(DPageHeader)this.header) {
-      pgHeader
+      myHeader
         .title(titleEdit("Glossary bearbeiten"))
         .rootPath(this.rootPath);
     }
@@ -47,9 +47,10 @@ class DCMSGlossaryUpdateView : DAPPEntityUpdateView {
         .breadcrumbs(
           BS5Breadcrumb(
             BS5BreadcrumbList
+            .link(["href":"/"], "UIM")
             .link(["href":"/cms"], "CMS")
             .link(["href":this.rootPath], "Glossarys")
-            .link(["active":"active", "href":rootPath~"/update?id="~(this.entity ? this.entity["id"] : " -missing-")], "Bearbeiten")
+            .item(["active", "fw-bold"], ["href":rootPath~"/update?id="~(this.entity ? this.entity["id"] : " -missing-")], "Bearbeiten")
           )          
         );
     }

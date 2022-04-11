@@ -21,6 +21,13 @@ class DCMSPagesIndexView : DAPPEntitiesListView {
     auto headerTitle = titleList("Pages");
     auto bodyTitle = "Gefundene Pages";
 
+    auto myForm = APPEntitiesListForm(this)
+      .header(
+        FormHeader
+          .mainTitle("Pages")
+          .subTitle("Pages anzeigen")
+          .actions([["print", "export"]]));
+
     this
       .header(
         PageHeader(this)
@@ -30,12 +37,7 @@ class DCMSPagesIndexView : DAPPEntitiesListView {
           .rootPath(this.rootPath)
       )
       .form(
-        APPEntitiesListForm(this)
-          .header(
-            FormHeader
-              .mainTitle("Pages")
-              .subTitle("Pages anzeigen")
-              .actions([["print", "export"]]))
+        myForm
           .content(EntitiesFormContent(myForm))
           .rootPath(this.rootPath));
   }
@@ -46,7 +48,7 @@ class DCMSPagesIndexView : DAPPEntitiesListView {
     if (hasError || "redirect" in options) { return; }
 
     if (auto myForm = cast(DForm)this.form) {
-      frm
+      myForm
         .header(
           FormHeader
             .rootPath("/pages")

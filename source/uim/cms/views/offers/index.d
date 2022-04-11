@@ -14,12 +14,20 @@ class DCMSOffersIndexView : DAPPEntitiesListView {
 
     auto bc = BS5Breadcrumb(
       BS5BreadcrumbList
+      .link(["href":"/"], "UIM")
       .link(["href":"/cms"], "CMS")
       .link(["href":this.rootPath], "Offers")
     );
 
     auto headerTitle = titleList("Offers");
     auto bodyTitle = "Gefundene Offers";
+
+    auto myForm = APPEntitiesListForm(this)
+      .header(
+        FormHeader
+          .mainTitle("Offers")
+          .subTitle("Offers anzeigen")
+          .actions([["print", "export"]]));
 
     this
       .header(
@@ -30,12 +38,7 @@ class DCMSOffersIndexView : DAPPEntitiesListView {
           .rootPath(this.rootPath)
       )
       .form(
-        APPEntitiesListForm(this)
-          .header(
-            FormHeader
-              .mainTitle("Offers")
-              .subTitle("Offers anzeigen")
-              .actions([["print", "export"]]))
+        myForm
           .content(EntitiesFormContent(myForm))
           .rootPath(this.rootPath));
   }
@@ -46,7 +49,7 @@ class DCMSOffersIndexView : DAPPEntitiesListView {
     if (hasError || "redirect" in options) { return; }
 
     if (auto myForm = cast(DForm)this.form) {
-      frm.entities(this.entities);
+      myForm.entities(this.entities);
     } 
   }
 

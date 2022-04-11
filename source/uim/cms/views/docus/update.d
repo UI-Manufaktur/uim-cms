@@ -49,7 +49,7 @@ class DCMSDocusUpdateView : DAPPEntityUpdateView {
             BS5BreadcrumbList
             .link(["href":"/cms"], "CMS")
             .link(["href":this.rootPath], "Docus")
-            .link(["active":"active", "href":rootPath~"/update?id="~(this.entity ? this.entity["id"] : " -missing-")], "Bearbeiten")
+            .item(["active", "fw-bold"], ["href":rootPath~"/update?id="~(this.entity ? this.entity["id"] : " -missing-")], "Bearbeiten")
           )          
         );
     }

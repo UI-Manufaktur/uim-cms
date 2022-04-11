@@ -13,19 +13,19 @@ class DCMSOffersDeleteView : DAPPEntityDeleteView {
     this.rootPath("/cms/offers");
 
     if (auto myHeader = cast(DPageHeader)this.header) {
-      header
+      myHeader
         .title(titleDelete("Offer löschen"))
         .rootPath(this.rootPath);
     }
     
      if (auto myForm = cast(DForm)this.form) {
-      frm
+      myForm
         .action(this.rootPath~"/actions/delete")
         .content(CMSFormContent(myForm))
         .rootPath(this.rootPath);
 
       if (auto myFormHeader = cast(DFormHeader)myForm.header) {
-        frmHeader
+        myFormHeader
         .mainTitle("Offers")
         .subTitle("Offers löschen");
       }
@@ -40,13 +40,14 @@ class DCMSOffersDeleteView : DAPPEntityDeleteView {
     auto bodyTitle = "Offer Name:";
 
     if (auto myHeader = cast(DPageHeader)this.header) {
-      pgHeader
+      myHeader
         .breadcrumbs(
           BS5Breadcrumb(
             BS5BreadcrumbList
+            .link(["href":"/"], "UIM")
             .link(["href":"/cms"], "CMS")
             .link(["href":rootPath], "Offers")
-            .link(["active":"active", "href":rootPath~"/delete?id="~(this.entity ? this.entity["id"] : " -missing-")], "Löschen")
+            .item(["active", "fw-bold"], ["href":rootPath~"/delete?id="~(this.entity ? this.entity["id"] : " -missing-")], "Löschen")
           )          
         );
     }

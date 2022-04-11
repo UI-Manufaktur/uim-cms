@@ -47,7 +47,7 @@ class DCMSLinksDeleteView : DAPPEntityDeleteView {
             .link(["href":"/"], "UIM")
             .link(["href":"/cms"], "CMS")
             .link(["href":rootPath], "Links")
-            .link(["active":"active", "href":rootPath~"/delete?id="~(this.entity ? this.entity["id"] : " -missing-")], "Löschen")
+            .item(["active", "fw-bold"], ["href":rootPath~"/delete?id="~(this.entity ? this.entity["id"] : " -missing-")], "Löschen")
           )          
         );
     }

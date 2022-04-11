@@ -14,8 +14,9 @@ class DCMSLinksIndexView : DAPPEntitiesListView {
 
     auto bc = BS5Breadcrumb(
       BS5BreadcrumbList
-      .link(["href":"/cms"], "CMS")
-      .link(["href":this.rootPath], "Links")
+        .link(["href":"/"], "UIM")
+        .link(["href":"/cms"], "CMS")
+        .link(["href":this.rootPath], "Links")
     );
 
     auto headerTitle = titleList("Links");
@@ -47,7 +48,7 @@ class DCMSLinksIndexView : DAPPEntitiesListView {
     if (hasError || "redirect" in options) { return; }
 
     if (auto myForm = cast(DForm)this.form) {
-      frm.entities(this.entities);
+      myForm.entities(this.entities);
     } 
   }
 

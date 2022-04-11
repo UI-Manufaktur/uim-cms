@@ -13,19 +13,19 @@ override void initialize() {
     this.rootPath("/cms/newss");
 
     if (auto myHeader = cast(DPageHeader)this.header) {
-      pgHeader
+      myHeader
         .title(titleView("News anzeigen"))
         .actions([["refresh", "list", "create"]])
         .rootPath(this.rootPath);
     }
 
     if (auto myForm = cast(DForm)this.form) {
-      frm
+      myForm
         .crudMode(this.crudMode)
         .content(CMSFormContent(myForm));
 
       if (auto myFormHeader = cast(DFormHeader)myForm.header) {
-        frmHeader
+        myFormHeader
           .mainTitle("News")
           .subTitle("News anzeigen");
       }
@@ -41,13 +41,14 @@ override void initialize() {
     auto bodyTitle = "News Name:";
 
     if (auto myHeader = cast(DPageHeader)this.header) {
-      pgHeader
+      myHeader
         .breadcrumbs(
           BS5Breadcrumb(
             BS5BreadcrumbList
+            .link(["href":"/"], "UIM")
             .link(["href":"/cms"], "CMS")
             .link(["href":this.rootPath], "News")
-            .link(["active":"active", "href":rootPath~"/view?id="~(this.entity ? this.entity["id"] : " -missing-")], "Anzeigen")
+            .item(["active", "fw-bold"], ["href":rootPath~"/view?id="~(this.entity ? this.entity["id"] : " -missing-")], "Anzeigen")
           )          
         );
     }

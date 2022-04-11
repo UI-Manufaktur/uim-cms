@@ -14,13 +14,20 @@ class DCMSNewsIndexView : DAPPEntitiesListView {
 
     auto bc = BS5Breadcrumb(
       BS5BreadcrumbList
+      .link(["href":"/"], "UIM")
       .link(["href":"/cms"], "CMS")
-      .link(["href":this.rootPath], "News")
+      .item(["href":this.rootPath], "News")
     );
 
     auto headerTitle = titleList("News");
     auto bodyTitle = "Gefundene News";
 
+    auto myForm = APPEntitiesListForm(this)
+      .header(
+        FormHeader
+          .mainTitle("News")
+          .subTitle("News anzeigen")
+          .actions([["print", "export"]]));
     this
       .header(
         PageHeader(this)
@@ -30,12 +37,7 @@ class DCMSNewsIndexView : DAPPEntitiesListView {
           .rootPath(this.rootPath)
       )
       .form(
-        APPEntitiesListForm(this)
-          .header(
-            FormHeader
-              .mainTitle("News")
-              .subTitle("News anzeigen")
-              .actions([["print", "export"]]))
+        myForm
           .content(EntitiesFormContent(myForm))
           .rootPath(this.rootPath));
    }
@@ -46,7 +48,7 @@ class DCMSNewsIndexView : DAPPEntitiesListView {
     if (hasError || "redirect" in options) { return; }
 
     if (auto myForm = cast(DForm)this.form) {
-      frm.entities(this.entities);
+      myForm.entities(this.entities);
     } 
   }
 
