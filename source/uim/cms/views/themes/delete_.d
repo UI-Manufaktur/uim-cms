@@ -40,13 +40,13 @@ class DCMSThemesDeleteView : DAPPEntityDeleteView {
     auto bodyTitle = "Theme Name:";
 
     if (auto myHeader = cast(DPageHeader)this.header) {
-      pgHeader
+      myHeader
         .breadcrumbs(
           BS5Breadcrumb(
             BS5BreadcrumbList
             .link(["href":"/cms"], "CMS")
             .link(["href":rootPath], "Themes")
-            .item(["active", "fw-bold"], ["href":rootPath~"/delete?id="~(this.entity ? this.entity["id"] : " -missing-")], "Löschen")
+            .item(["active", "fw-bold"], "Löschen")
           )          
         );
     }

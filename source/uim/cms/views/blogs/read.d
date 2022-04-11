@@ -16,6 +16,15 @@ class DCMSBlogsReadView : DAPPEntityReadView {
       myHeader
         .title(titleView("Blog anzeigen"))
         .actions([["refresh", "list", "create"]])
+        .breadcrumbs(
+          BS5Breadcrumb(
+            BS5BreadcrumbList
+            .link(["href":"/"], "UIM")
+            .link(["href":"/cms"], "CMS")
+            .link(["href":this.rootPath], "Blogs")
+            .item(["active", "fw-bold"], "Anzeigen")
+          )          
+        )
         .rootPath(this.rootPath);
     }
 
@@ -39,19 +48,6 @@ class DCMSBlogsReadView : DAPPEntityReadView {
 
     auto headerTitle = "Blog ID:"~(this.entity ? this.entity.id.toString : " - Unbekannt -");
     auto bodyTitle = "Blog Name:";
-
-    if (auto myHeader = cast(DPageHeader)this.header) {
-      myHeader
-        .breadcrumbs(
-          BS5Breadcrumb(
-            BS5BreadcrumbList
-            .link(["href":"/"], "UIM")
-            .link(["href":"/cms"], "CMS")
-            .link(["href":this.rootPath], "Blogs")
-            .item(["active", "fw-bold"], ["href":rootPath~"/view?id="~(this.entity ? this.entity["id"] : " -missing-")], "Anzeigen")
-          )          
-        );
-    }
 
     this.form
       .parameter("headerTitle", headerTitle)

@@ -13,21 +13,21 @@ class DCMSTutorialsDeleteView : DAPPEntityDeleteView {
     this.rootPath("/cms/tutorials");
 
     if (auto myHeader = cast(DPageHeader)this.header) {
-      header
+      myHeader
         .title(titleDelete("Tutorial löschen"))
         .rootPath(this.rootPath);
     }
     
      if (auto myForm = cast(DForm)this.form) {
-      frm
+      myForm
         .action(this.rootPath~"/actions/delete")
         .content(CMSFormContent(myForm))
         .rootPath(this.rootPath);
 
       if (auto myFormHeader = cast(DFormHeader)myForm.header) {
-        frmHeader
-        .mainTitle("Tutorials")
-        .subTitle("Tutorials löschen");
+        myFormHeader
+          .mainTitle("Tutorials")
+          .subTitle("Tutorials löschen");
       }
     }    
   }
@@ -40,10 +40,11 @@ class DCMSTutorialsDeleteView : DAPPEntityDeleteView {
     auto bodyTitle = "Tutorial Name:";
 
     if (auto myHeader = cast(DPageHeader)this.header) {
-      pgHeader
+      myHeader
         .breadcrumbs(
           BS5Breadcrumb(
             BS5BreadcrumbList
+            .link(["href":"/"], "UIM")
             .link(["href":"/cms"], "CMS")
             .link(["href":rootPath], "Tutorials")
             .item(["active", "fw-bold"], ["href":rootPath~"/delete?id="~(this.entity ? this.entity["id"] : " -missing-")], "Löschen")

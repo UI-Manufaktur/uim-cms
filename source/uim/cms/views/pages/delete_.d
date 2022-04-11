@@ -40,7 +40,7 @@ class DCMSPagesDeleteView : DAPPEntityDeleteView {
     auto bodyTitle = "Page Name:";
 
     if (auto myHeader = cast(DPageHeader)this.header) {
-      pgHeader
+      myHeader
         .breadcrumbs(
           BS5Breadcrumb(
             BS5BreadcrumbList

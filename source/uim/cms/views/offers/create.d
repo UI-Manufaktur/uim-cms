@@ -17,7 +17,7 @@ class DCMSOffersCreateView : DAPPEntityCreateView {
         .link(["href":"/"], "UIM")
         .link(["href":"/cms"], "CMS")
         .link(["href":this.rootPath], "Offers")
-        .item(["active"], ["href":this.rootPath~"/create", "aria-current":"page"], "Create")
+        .item(["active", "fw-bold"], "Erstellen")
     );
 
     if(auto myHeader = cast(DPageHeader)this.header) {
@@ -52,7 +52,7 @@ class DCMSOffersCreateView : DAPPEntityCreateView {
     }
 
     if (auto myForm = cast(DForm)this.form) {
-      frm
+      myForm
         .action(this.rootPath~"/actions/create")
         .entity(this.entity);
     }

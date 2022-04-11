@@ -21,7 +21,7 @@ class DCMSNewsUpdateView : DAPPEntityUpdateView {
 
     if (auto myForm = cast(DForm)this.form) {
       myForm
-        .action("/cms/news/actions/save")
+        .action("/cms/news/actions/update")
         .crudMode(CRUDModes.Update)
         .content(CMSFormContent(myForm));
 

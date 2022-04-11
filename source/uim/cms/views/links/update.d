@@ -21,7 +21,7 @@ class DCMSLinksUpdateView : DAPPEntityUpdateView {
 
     if (auto myForm = cast(DForm)this.form) {
       myForm
-        .action("/cms/links/actions/save")
+        .action("/cms/links/actions/update")
         .crudMode(CRUDModes.Update)
         .content(CMSFormContent(myForm));
 

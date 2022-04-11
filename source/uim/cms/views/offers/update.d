@@ -21,7 +21,7 @@ class DCMSOffersUpdateView : DAPPEntityUpdateView {
 
     if (auto myForm = cast(DForm)this.form) {
       myForm
-        .action("/cms/offers/actions/save")
+        .action("/cms/offers/actions/update")
         .crudMode(CRUDModes.Update)
         .content(CMSFormContent(myForm));
 

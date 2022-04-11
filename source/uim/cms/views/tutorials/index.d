@@ -21,6 +21,13 @@ class DCMSTutorialsIndexView : DAPPEntitiesListView {
     auto headerTitle = titleList("Tutorials");
     auto bodyTitle = "Gefundene Tutorials";
 
+    auto myForm = APPEntitiesListForm(this)
+      .header(
+        FormHeader
+          .mainTitle("Tutorials")
+          .subTitle("Tutorials anzeigen")
+          .actions([["print", "export"]]));
+          
     this
       .header(
         PageHeader(this)
@@ -30,12 +37,7 @@ class DCMSTutorialsIndexView : DAPPEntitiesListView {
           .rootPath(this.rootPath)
       )
       .form(
-        APPEntitiesListForm(this)
-          .header(
-            FormHeader
-              .mainTitle("Tutorials")
-              .subTitle("Tutorials anzeigen")
-              .actions([["print", "export"]]))
+        myForm
           .content(EntitiesFormContent(myForm))
           .rootPath(this.rootPath));
   }
@@ -46,7 +48,7 @@ class DCMSTutorialsIndexView : DAPPEntitiesListView {
     if (hasError || "redirect" in options) { return; }
 
     if (auto myForm = cast(DForm)this.form) {
-      frm.entities(this.entities);
+      myForm.entities(this.entities);
     } 
   }
 

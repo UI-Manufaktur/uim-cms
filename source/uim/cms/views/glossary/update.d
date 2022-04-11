@@ -21,7 +21,7 @@ class DCMSGlossaryUpdateView : DAPPEntityUpdateView {
 
     if (auto myForm = cast(DForm)this.form) {
       myForm
-        .action("/cms/glossarys/actions/save")
+        .action("/cms/glossarys/actions/update")
         .crudMode(CRUDModes.Update)
         .content(CMSFormContent(myForm));
 

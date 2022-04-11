@@ -21,7 +21,7 @@ class DCMSPagesUpdateView : DAPPEntityUpdateView {
 
     if (auto myForm = cast(DForm)this.form) {
       myForm
-        .action("/cms/pages/actions/save")
+        .action("/cms/pages/actions/update")
         .crudMode(CRUDModes.Update)
         .content(CMSFormContent(myForm));
 
@@ -43,7 +43,7 @@ class DCMSPagesUpdateView : DAPPEntityUpdateView {
     auto bodyTitle = "Page Name:";
 
     if (auto myHeader = cast(DPageHeader)this.header) {
-      pgHeader
+      myHeader
         .breadcrumbs(
           BS5Breadcrumb(
             BS5BreadcrumbList

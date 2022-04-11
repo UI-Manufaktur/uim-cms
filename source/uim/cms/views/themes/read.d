@@ -13,19 +13,19 @@ override void initialize() {
     this.rootPath("/cms/themes");
 
     if (auto myHeader = cast(DPageHeader)this.header) {
-      pgHeader
+      myHeader
         .title(titleView("Theme anzeigen"))
         .actions([["refresh", "list", "create"]])
         .rootPath(this.rootPath);
     }
 
     if (auto myForm = cast(DForm)this.form) {
-      frm
+      myForm
         .crudMode(this.crudMode)
         .content(CMSFormContent(myForm));
 
       if (auto myFormHeader = cast(DFormHeader)myForm.header) {
-        frmHeader
+        myFormHeader
           .mainTitle("Themes")
           .subTitle("Themes anzeigen");
       }
@@ -41,7 +41,7 @@ override void initialize() {
     auto bodyTitle = "Theme Name:";
 
     if (auto myHeader = cast(DPageHeader)this.header) {
-      pgHeader
+      myHeader
         .breadcrumbs(
           BS5Breadcrumb(
             BS5BreadcrumbList

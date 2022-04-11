@@ -21,7 +21,7 @@ class DCMSThemesUpdateView : DAPPEntityUpdateView {
 
     if (auto myForm = cast(DForm)this.form) {
       myForm
-        .action("/cms/themes/actions/save")
+        .action("/cms/themes/actions/update")
         .crudMode(CRUDModes.Update)
         .content(CMSFormContent(myForm));
 

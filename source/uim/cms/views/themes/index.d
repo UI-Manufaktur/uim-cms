@@ -14,12 +14,20 @@ class DCMSThemesIndexView : DAPPEntitiesListView {
 
     auto bc = BS5Breadcrumb(
       BS5BreadcrumbList
-      .link(["href":"/cms"], "CMS")
-      .link(["href":this.rootPath], "Themes")
+        .link(["href":"/"], "UIM")
+        .link(["href":"/cms"], "CMS")
+        .link(["href":this.rootPath], "Themes")
     );
 
     auto headerTitle = titleList("Themes");
     auto bodyTitle = "Gefundene Themes";
+
+    auto myForm = APPEntitiesListForm(this)
+      .header(
+        FormHeader
+          .mainTitle("Themes")
+          .subTitle("Themes anzeigen")
+          .actions([["print", "export"]]));
 
     this
       .header(
@@ -30,12 +38,7 @@ class DCMSThemesIndexView : DAPPEntitiesListView {
           .rootPath(this.rootPath)
       )
       .form(
-        APPEntitiesListForm(this)
-          .header(
-            FormHeader
-              .mainTitle("Themes")
-              .subTitle("Themes anzeigen")
-              .actions([["print", "export"]]))
+        myForm
           .content(EntitiesFormContent(myForm))
           .rootPath(this.rootPath));     
    }

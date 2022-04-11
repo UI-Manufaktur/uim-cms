@@ -21,7 +21,7 @@ class DCMSDocusUpdateView : DAPPEntityUpdateView {
 
     if (auto myForm = cast(DForm)this.form) {
       myForm
-        .action("/cms/docus/actions/save")
+        .action("/cms/docus/actions/update")
         .crudMode(CRUDModes.Update)
         .content(CMSFormContent(myForm));
 

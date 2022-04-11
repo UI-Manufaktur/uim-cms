@@ -7,25 +7,33 @@ import uim.cms.views.tutorials;
 class DCMSTutorialsReadView : DAPPEntityReadView {
   mixin(APPViewThis!("CMSTutorialsReadView"));
 
-override void initialize() {
+  override void initialize() {
     super.initialize;
 
     this.rootPath("/cms/tutorials");
 
     if (auto myHeader = cast(DPageHeader)this.header) {
-      pgHeader
+      myHeader
         .title(titleView("Tutorial anzeigen"))
-        .actions([["refresh", "list", "create"]])
+        .actions([["refresh", "list", "create"]]).breadcrumbs(
+          BS5Breadcrumb(
+            BS5BreadcrumbList
+            .link(["href":"/"], "UIM")
+            .link(["href":"/cms"], "CMS")
+            .link(["href":this.rootPath], "Tutorials")
+            .item(["active", "fw-bold"], "Anzeigen")
+          )          
+        )
         .rootPath(this.rootPath);
     }
 
     if (auto myForm = cast(DForm)this.form) {
-      frm
+      myForm
         .crudMode(this.crudMode)
         .content(CMSFormContent(myForm));
 
       if (auto myFormHeader = cast(DFormHeader)myForm.header) {
-        frmHeader
+        myFormHeader
           .mainTitle("Tutorials")
           .subTitle("Tutorials anzeigen");
       }
@@ -39,18 +47,6 @@ override void initialize() {
 
     auto headerTitle = "Tutorial ID:"~(this.entity ? this.entity.id.toString : " - Unbekannt -");
     auto bodyTitle = "Tutorial Name:";
-
-    if (auto myHeader = cast(DPageHeader)this.header) {
-      pgHeader
-        .breadcrumbs(
-          BS5Breadcrumb(
-            BS5BreadcrumbList
-            .link(["href":"/cms"], "CMS")
-            .link(["href":this.rootPath], "Tutorials")
-            .item(["active", "fw-bold"], ["href":rootPath~"/view?id="~(this.entity ? this.entity["id"] : " -missing-")], "Anzeigen")
-          )          
-        );
-    }
 
     this.form
       .parameter("headerTitle", headerTitle)

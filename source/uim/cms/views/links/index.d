@@ -37,7 +37,7 @@ class DCMSLinksIndexView : DAPPEntitiesListView {
           .rootPath(this.rootPath)
       )
       .form(
-        myForm(this)
+        myForm
           .content(EntitiesFormContent(myForm))
           .rootPath(this.rootPath));
   }
