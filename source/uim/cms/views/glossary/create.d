@@ -51,7 +51,7 @@ class DCMSGlossaryCreateView : DAPPEntityCreateView {
     }
 
     if (auto myForm = cast(DForm)this.form) {
-      frm
+      myForm
         .action(this.rootPath~"/actions/create")
         .entity(this.entity);
     }

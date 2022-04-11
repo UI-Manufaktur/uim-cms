@@ -20,13 +20,13 @@ class DCMSGlossaryUpdateView : DAPPEntityUpdateView {
     }
 
     if (auto myForm = cast(DForm)this.form) {
-      frm
+      myForm
         .action("/cms/glossarys/actions/save")
         .crudMode(CRUDModes.Update)
         .content(CMSFormContent(myForm));
 
       if (auto myFormHeader = cast(DFormHeader)myForm.header) {
-        frmHeader
+        myFormHeader
           .mainTitle("Glossary")
           .subTitle("Glossary bearbeiten");
       }
@@ -43,7 +43,7 @@ class DCMSGlossaryUpdateView : DAPPEntityUpdateView {
     auto bodyTitle = "Glossary Name:";
 
     if (auto myHeader = cast(DPageHeader)this.header) {
-      pgHeader
+      myHeader
         .breadcrumbs(
           BS5Breadcrumb(
             BS5BreadcrumbList

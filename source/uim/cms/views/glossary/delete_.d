@@ -13,21 +13,21 @@ class DCMSGlossaryDeleteView : DAPPEntityDeleteView {
     this.rootPath("/cms/glossary");
 
     if (auto myHeader = cast(DPageHeader)this.header) {
-      header
+      myHeader
         .title(titleDelete("Glossary löschen"))
         .rootPath(this.rootPath);
     }
     
      if (auto myForm = cast(DForm)this.form) {
-      frm
+      myForm
         .action(this.rootPath~"/actions/delete")
         .content(CMSFormContent(myForm))
         .rootPath(this.rootPath);
 
       if (auto myFormHeader = cast(DFormHeader)myForm.header) {
-        frmHeader
-        .mainTitle("Glossary")
-        .subTitle("Glossary löschen");
+        myFormHeader
+          .mainTitle("Glossary")
+          .subTitle("Glossary löschen");
       }
     }    
   }
@@ -40,7 +40,7 @@ class DCMSGlossaryDeleteView : DAPPEntityDeleteView {
     auto bodyTitle = "Glossary Name:";
 
     if (auto myHeader = cast(DPageHeader)this.header) {
-      pgHeader
+      myHeader
         .breadcrumbs(
           BS5Breadcrumb(
             BS5BreadcrumbList

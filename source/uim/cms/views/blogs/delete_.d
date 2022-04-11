@@ -13,7 +13,7 @@ class DCMSBlogsDeleteView : DAPPEntityDeleteView {
     this.rootPath("/cms/blogs");
 
     if (auto myHeader = cast(DPageHeader)this.header) {
-      header
+      myHeader
         .title(titleDelete("Blog löschen"))
         .rootPath(this.rootPath);
     }
@@ -40,7 +40,7 @@ class DCMSBlogsDeleteView : DAPPEntityDeleteView {
     auto bodyTitle = "Blog Name:";
 
     if (auto myHeader = cast(DPageHeader)this.header) {
-      pgHeader
+      myHeader
         .breadcrumbs(
           BS5Breadcrumb(
             BS5BreadcrumbList

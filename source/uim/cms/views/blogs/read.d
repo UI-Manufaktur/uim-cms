@@ -13,7 +13,7 @@ class DCMSBlogsReadView : DAPPEntityReadView {
     this.rootPath("/cms/blogs");
 
     if (auto myHeader = cast(DPageHeader)this.header) {
-      pgHeader
+      myHeader
         .title(titleView("Blog anzeigen"))
         .actions([["refresh", "list", "create"]])
         .rootPath(this.rootPath);

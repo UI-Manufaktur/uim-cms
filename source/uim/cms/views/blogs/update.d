@@ -43,7 +43,7 @@ class DCMSBlogsUpdateView : DAPPEntityUpdateView {
     auto bodyTitle = "Blog Name:";
 
     if (auto myHeader = cast(DPageHeader)this.header) {
-      pgHeader
+      myHeader
         .breadcrumbs(
           BS5Breadcrumb(
             BS5BreadcrumbList

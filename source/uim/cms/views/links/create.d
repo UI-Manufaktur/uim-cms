@@ -20,19 +20,19 @@ class DCMSLinksCreateView : DAPPEntityCreateView {
     );
 
     if(auto myHeader = cast(DPageHeader)this.header) {
-      header
+      myHeader
         .breadcrumbs(bc)
         .title(titleCreate("Link erstellen"))
         .rootPath(this.rootPath);
     }
     
     if (auto myForm = cast(DForm)this.form) {
-      frm
+      myForm
         .action(this.rootPath~"/actions/create")
         .content(CMSFormContent(myForm));
 
       if (auto myFormHeader = cast(DFormHeader)myForm.header) {
-        frmHeader
+        myFormHeader
           .mainTitle("Neuer Link")
           .subTitle("Bitte Werte eingeben")
           .actions([["cancel","save"]]);
@@ -51,7 +51,7 @@ class DCMSLinksCreateView : DAPPEntityCreateView {
     }
 
     if (auto myForm = cast(DForm)this.form) {
-      frm
+      myForm
         .action(this.rootPath~"/actions/create")
         .entity(this.entity);
     }

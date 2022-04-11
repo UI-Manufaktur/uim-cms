@@ -51,7 +51,7 @@ class DCMSDocusIndexView : DAPPEntitiesListView {
     if (hasError || "redirect" in options) { return; }
 
     if (auto myForm = cast(DForm)this.form) {
-      frm.entities(this.entities);
+      myForm.entities(this.entities);
     } 
   }
 

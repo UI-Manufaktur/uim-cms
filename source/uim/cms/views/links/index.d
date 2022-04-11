@@ -21,6 +21,12 @@ class DCMSLinksIndexView : DAPPEntitiesListView {
     auto headerTitle = titleList("Links");
     auto bodyTitle = "Gefundene Links";
 
+    auto myForm = APPEntitiesListForm(this)
+      .header(
+        FormHeader
+          .mainTitle("Links")
+          .subTitle("Links anzeigen")
+          .actions([["print", "export"]]));
     this
       .header(
         PageHeader(this)
@@ -30,12 +36,7 @@ class DCMSLinksIndexView : DAPPEntitiesListView {
           .rootPath(this.rootPath)
       )
       .form(
-        APPEntitiesListForm(this)
-          .header(
-            FormHeader
-              .mainTitle("Links")
-              .subTitle("Links anzeigen")
-              .actions([["print", "export"]]))
+        myForm(this)
           .content(EntitiesFormContent(myForm))
           .rootPath(this.rootPath));
   }
