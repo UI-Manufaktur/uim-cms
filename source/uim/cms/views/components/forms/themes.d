@@ -12,7 +12,7 @@ class DCMSThemeForm : DForm {
     
     this
       .content(
-        CMSThemeFormContent);
+        CMSThemeFormContent(myForm));
   }
 }
 mixin(ViewComponentCalls!("CMSThemeForm"));

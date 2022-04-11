@@ -12,6 +12,7 @@ class DCMSFormGroupImage : DAPPTextFormGroup {
     this
     .id("entity_imagepath")
     .name("entity_imagepath")
+    .inputName("entity_imagepath")
     .fieldName("imagePath")
     .label("Titelbild"); 
   }

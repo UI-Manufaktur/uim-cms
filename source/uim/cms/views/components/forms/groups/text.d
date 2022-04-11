@@ -12,6 +12,7 @@ class DCMSFormGroupText : DAPPTextAreaFormGroup {
     this
     .id("entity_text")
     .name("entity_text")
+    .inputName("entity_text")
     .fieldName("text")
     .label("Inhalt");
   }
@@ -20,5 +21,5 @@ mixin(FormComponentCalls!("CMSFormGroupText", true));
 
 version(test_uim_cms) {
   unittest {
-    // TODO Tests
+    assert(CMSFormGroupText);
 }}

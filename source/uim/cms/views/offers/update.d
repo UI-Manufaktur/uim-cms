@@ -23,7 +23,7 @@ class DCMSOffersUpdateView : DAPPEntityUpdateView {
       frm
         .action("/cms/offers/actions/save")
         .crudMode(CRUDModes.Update)
-        .content(CMSFormContent);
+        .content(CMSFormContent(myForm));
 
       if (auto frmHeader = cast(DFormHeader)frm.header) {
         frmHeader

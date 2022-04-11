@@ -12,16 +12,14 @@ class DCMSBlogsReadPageController : DCMSReadPageController {
     this
       .view(
         CMSBlogsReadView(this))
+      .rootPath("/cms/blogs") 
+      .collectionName("cms_blogs")    
       .scripts.addContents(
       editorSummary~
       editorText~
       "editorSummary.disabled();"~
       "editorText.disabled();"
     );
-
-    this
-      .rootPath("/cms/blogs") 
-      .collectionName("cms_blogs");    
   }
 }
 mixin(APPPageControllerCalls!("CMSBlogsReadPageController"));

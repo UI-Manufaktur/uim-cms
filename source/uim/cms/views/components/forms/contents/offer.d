@@ -10,5 +10,5 @@ mixin(FormComponentCalls!("CMSOfferFormContent", true));
 
 version(test_uim_cms) {
   unittest {
-   assert(CMSOfferFormContent);
+   assert(CMSOfferFormContent(myForm));
 }}

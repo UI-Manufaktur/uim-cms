@@ -12,6 +12,7 @@ class DCMSFormGroupTheme : DFormGroup {
     this
     .id("entity_theme")
     .name("entity_theme")
+    .inputName("entity_theme")
     .fieldName("themeId")
     .label("Thema"); 
   }

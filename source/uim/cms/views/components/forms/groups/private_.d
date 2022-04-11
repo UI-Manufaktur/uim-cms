@@ -13,6 +13,7 @@ class DCMSFormGroupPrivate : DAPPSwitchFormGroup {
 
     this
     .id("entity_private")
+    .inputName("entity_private")
     .fieldName("isPrivate")
     .label("Privat"); 
   }

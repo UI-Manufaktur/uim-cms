@@ -10,5 +10,5 @@ mixin(FormComponentCalls!("CMSGlossaryItemFormContent", true));
 
 version(test_uim_cms) {
   unittest {
-    assert(CMSGlossaryItemFormContent);
+    assert(CMSGlossaryItemFormContent(myForm));
 }}

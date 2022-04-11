@@ -29,7 +29,7 @@ class DCMSThemesCreateView : DAPPEntityCreateView {
     if (auto frm = cast(DForm)this.form) {
       frm
         .action(this.rootPath~"/actions/create")
-        .content(CMSFormContent);
+        .content(CMSFormContent(myForm));
 
       if (auto frmHeader = cast(DFormHeader)frm.header) {
         frmHeader

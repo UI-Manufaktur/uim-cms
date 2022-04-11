@@ -12,6 +12,7 @@ class DCMSFormGroupKeywords : DFormGroup {
     this
     .id("entity_keywords")
     .name("entity_keywords")
+    .inputName("entity_keywords")
     .fieldName("keywords")
     .label("Stichworte")
     .placeholder("Stichworte mit # getrennt eingeben");

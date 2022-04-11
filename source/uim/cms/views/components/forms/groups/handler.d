@@ -17,7 +17,8 @@ class DCMSFormGroupHandler : DFormGroupHandler {
         "keywords": CMSFormGroupKeywords, 
         "image": CMSFormGroupImage, 
         "summary": CMSFormGroupSummary, 
-        "text": CMSFormGroupText]);
+        "text": CMSFormGroupText, 
+        "themes": CMSFormGroupTheme]);
   } 
 }  
 mixin(FormComponentCalls!("CMSFormGroupHandler", true));

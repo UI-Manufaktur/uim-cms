@@ -12,19 +12,22 @@ class DCMSBlogsUpdatePageController : DCMSUpdatePageController {
     this
       .view(
         CMSBlogsUpdateView(this))
-      .scripts
-        .addContents(
-          editorSummary~editorText,
-    `window.addEventListener('load', (event) => {
-      document.getElementById("entityForm").addEventListener("submit", event => {
-        editorSummary.save();
-        editorText.save();
-      })
-    });`);
-
-    this
       .rootPath("/cms/blogs") 
       .collectionName("cms_blogs");   
+
+    if (auto vw = cast(DCMSBlogsUpdateView)this.view) {
+      if (auto form = cast(DForm)vw.form) {
+        this
+          .scripts
+            .addContents(
+              editorSummary~editorText,
+        `window.addEventListener('load', (event) => {
+          document.getElementById("`~form.id~`").addEventListener("submit", event => {
+            editorSummary.save();
+            editorText.save();
+          })
+        });`);
+    }}
   }
 }
 mixin(APPPageControllerCalls!("CMSBlogsUpdatePageController"));

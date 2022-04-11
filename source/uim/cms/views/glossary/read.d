@@ -22,7 +22,7 @@ override void initialize() {
     if (auto frm = cast(DForm)this.form) {
       frm
         .crudMode(this.crudMode)
-        .content(CMSFormContent);
+        .content(CMSFormContent(myForm));
 
       if (auto frmHeader = cast(DFormHeader)frm.header) {
         frmHeader

@@ -19,20 +19,20 @@ class DCMSBlogsCreateView : DAPPEntityCreateView {
       .link(["active"], ["href":this.rootPath~"/create", "aria-current":"page"], "Create")
     );
 
-    if(auto header = cast(DPageHeader)this.header) {
-      header
+    if(auto myHeader = cast(DPageHeader)this.header) {
+      myHeader
         .breadcrumbs(bc)
         .title(titleCreate("Blog erstellen"))
         .rootPath(this.rootPath);
     }
     
-    if (auto frm = cast(DForm)this.form) {
-      frm
+    if (auto myForm = cast(DForm)this.form) {
+      myForm
         .action(this.rootPath~"/actions/create")
-        .content(CMSFormContent);
+        .content(CMSFormContent(myForm));
 
-      if (auto frmHeader = cast(DFormHeader)frm.header) {
-        frmHeader
+      if (auto myFormHeader = cast(DFormHeader)myForm.header) {
+        myFormHeader
           .mainTitle("Neuer Blog")
           .subTitle("Bitte Werte eingeben")
           .actions([["cancel","save"]]);

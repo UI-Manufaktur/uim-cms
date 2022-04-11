@@ -10,5 +10,5 @@ mixin(FormComponentCalls!("CMSDemoFormContent", true));
 
 version(test_uim_cms) {
   unittest {
-    assert(CMSDemoFormContent);
+    assert(CMSDemoFormContent(myForm));
 }}

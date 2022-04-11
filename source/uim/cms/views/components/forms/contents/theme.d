@@ -38,5 +38,5 @@ mixin(FormComponentCalls!("CMSThemeFormContent", true));
 
 version(test_uim_cms) {
   unittest {
-    assert(CMSThemeFormContent);
+    assert(CMSThemeFormContent(myForm));
 }}

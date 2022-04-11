@@ -12,6 +12,8 @@ class DCMSBlogsDeletePageController : DCMSDeletePageController {
     this
       .view(
         CMSBlogsDeleteView(this))
+      .rootPath("/cms/blogs") 
+      .collectionName("cms_blogs")    
       .scripts
         .addContents(
           editorSummary~
@@ -19,9 +21,6 @@ class DCMSBlogsDeletePageController : DCMSDeletePageController {
           "editorSummary.disabled();"~
           "editorText.disabled();"
         );
-    this
-      .rootPath("/cms/blogs") 
-      .collectionName("cms_blogs");    
   }
 }
 mixin(APPPageControllerCalls!("CMSBlogsDeletePageController"));
