@@ -19,20 +19,20 @@ class DCMSGlossaryCreateView : DAPPEntityCreateView {
       .link(["active"], ["href":this.rootPath~"/create", "aria-current":"page"], "Create")
     );
 
-    if(auto header = cast(DPageHeader)this.header) {
-      header
+    if(auto myHeader = cast(DPageHeader)this.header) {
+      myHeader
         .breadcrumbs(bc)
         .title(titleCreate("Glossary erstellen"))
         .rootPath(this.rootPath);
     }
     
-    if (auto frm = cast(DForm)this.form) {
-      frm
+    if (auto myForm = cast(DForm)this.form) {
+      myForm
         .action(this.rootPath~"/actions/create")
         .content(CMSFormContent(myForm));
 
-      if (auto frmHeader = cast(DFormHeader)frm.header) {
-        frmHeader
+      if (auto myFormHeader = cast(DFormHeader)myForm.header) {
+        myFormHeader
           .mainTitle("Neuer Glossary")
           .subTitle("Bitte Werte eingeben")
           .actions([["cancel","save"]]);
@@ -50,7 +50,7 @@ class DCMSGlossaryCreateView : DAPPEntityCreateView {
       this.entity(this.controller.database["uim"]["cms_glossary"].createFromTemplate);
     }
 
-    if (auto frm = cast(DForm)this.form) {
+    if (auto myForm = cast(DForm)this.form) {
       frm
         .action(this.rootPath~"/actions/create")
         .entity(this.entity);

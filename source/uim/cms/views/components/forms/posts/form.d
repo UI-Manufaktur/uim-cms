@@ -11,7 +11,7 @@ class DCMSPostForm : DCMSForm {
     
     this
       .content(
-        CMSPostFormContent(myForm));
+        CMSPostFormContent(this));
   }
 
   mixin(OProperty!("DOOPEntity[]", "themes"));

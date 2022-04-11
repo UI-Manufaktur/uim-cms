@@ -12,20 +12,20 @@ class DCMSBlogsReadView : DAPPEntityReadView {
 
     this.rootPath("/cms/blogs");
 
-    if (auto pgHeader = cast(DPageHeader)this.header) {
+    if (auto myHeader = cast(DPageHeader)this.header) {
       pgHeader
         .title(titleView("Blog anzeigen"))
         .actions([["refresh", "list", "create"]])
         .rootPath(this.rootPath);
     }
 
-    if (auto frm = cast(DForm)this.form) {
-      frm
+    if (auto myForm = cast(DForm)this.form) {
+      myForm
         .crudMode(this.crudMode)
         .content(CMSFormContent(myForm));
 
-      if (auto frmHeader = cast(DFormHeader)frm.header) {
-        frmHeader
+      if (auto myFormHeader = cast(DFormHeader)myForm.header) {
+        myFormHeader
           .mainTitle("Blogs")
           .subTitle("Blogs anzeigen");
       }
@@ -40,7 +40,7 @@ class DCMSBlogsReadView : DAPPEntityReadView {
     auto headerTitle = "Blog ID:"~(this.entity ? this.entity.id.toString : " - Unbekannt -");
     auto bodyTitle = "Blog Name:";
 
-    if (auto pgHeader = cast(DPageHeader)this.header) {
+    if (auto myHeader = cast(DPageHeader)this.header) {
       pgHeader
         .breadcrumbs(
           BS5Breadcrumb(

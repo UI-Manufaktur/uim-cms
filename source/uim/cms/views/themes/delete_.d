@@ -12,19 +12,19 @@ class DCMSThemesDeleteView : DAPPEntityDeleteView {
 
     this.rootPath("/cms/themes");
 
-    if (auto header = cast(DPageHeader)this.header) {
+    if (auto myHeader = cast(DPageHeader)this.header) {
       header
         .title(titleDelete("Theme löschen"))
         .rootPath(this.rootPath);
     }
     
-     if (auto frm = cast(DForm)this.form) {
+     if (auto myForm = cast(DForm)this.form) {
       frm
         .action(this.rootPath~"/actions/delete")
-        .content(CMSFormContent)
+        .content(CMSFormContent(myForm))
         .rootPath(this.rootPath);
 
-      if (auto frmHeader = cast(DFormHeader)frm.header) {
+      if (auto myFormHeader = cast(DFormHeader)myForm.header) {
         frmHeader
         .mainTitle("Themes")
         .subTitle("Themes löschen");
@@ -39,7 +39,7 @@ class DCMSThemesDeleteView : DAPPEntityDeleteView {
     auto headerTitle = "Theme ID:"~(this.entity ? this.entity.id.toString : " - Unbekannt -");
     auto bodyTitle = "Theme Name:";
 
-    if (auto pgHeader = cast(DPageHeader)this.header) {
+    if (auto myHeader = cast(DPageHeader)this.header) {
       pgHeader
         .breadcrumbs(
           BS5Breadcrumb(

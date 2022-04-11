@@ -12,19 +12,19 @@ class DCMSPagesDeleteView : DAPPEntityDeleteView {
 
     this.rootPath("/cms/pages");
 
-    if (auto header = cast(DPageHeader)this.header) {
+    if (auto myHeader = cast(DPageHeader)this.header) {
       header
         .title(titleDelete("Page löschen"))
         .rootPath(this.rootPath);
     }
     
-     if (auto frm = cast(DForm)this.form) {
+     if (auto myForm = cast(DForm)this.form) {
       frm
         .action(this.rootPath~"/actions/delete")
-        .content(CMSFormContent)
+        .content(CMSFormContent(myForm))
         .rootPath(this.rootPath);
 
-      if (auto frmHeader = cast(DFormHeader)frm.header) {
+      if (auto myFormHeader = cast(DFormHeader)myForm.header) {
         frmHeader
         .mainTitle("Pages")
         .subTitle("Pages löschen");
@@ -39,7 +39,7 @@ class DCMSPagesDeleteView : DAPPEntityDeleteView {
     auto headerTitle = "Page ID:"~(this.entity ? this.entity.id.toString : " - Unbekannt -");
     auto bodyTitle = "Page Name:";
 
-    if (auto pgHeader = cast(DPageHeader)this.header) {
+    if (auto myHeader = cast(DPageHeader)this.header) {
       pgHeader
         .breadcrumbs(
           BS5Breadcrumb(

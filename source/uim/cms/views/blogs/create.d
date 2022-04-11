@@ -50,8 +50,8 @@ class DCMSBlogsCreateView : DAPPEntityCreateView {
       this.entity(this.controller.database["uim"]["cms_blogs"].createFromTemplate);
     }
 
-    if (auto frm = cast(DForm)this.form) {
-      frm
+    if (auto myForm = cast(DForm)this.form) {
+      myForm
         .action(this.rootPath~"/actions/create")
         .entity(this.entity);
     }

@@ -13,19 +13,19 @@ class DCMSNewsUpdateView : DAPPEntityUpdateView {
     this
       .rootPath("/cms/news");
 
-    if (auto pgHeader = cast(DPageHeader)this.header) {
+    if (auto myHeader = cast(DPageHeader)this.header) {
       pgHeader
         .title(titleEdit("News bearbeiten"))
         .rootPath(this.rootPath);
     }
 
-    if (auto frm = cast(DForm)this.form) {
+    if (auto myForm = cast(DForm)this.form) {
       frm
         .action("/cms/news/actions/save")
         .crudMode(CRUDModes.Update)
         .content(CMSFormContent(myForm));
 
-      if (auto frmHeader = cast(DFormHeader)frm.header) {
+      if (auto myFormHeader = cast(DFormHeader)myForm.header) {
         frmHeader
           .mainTitle("News")
           .subTitle("News bearbeiten");
@@ -42,7 +42,7 @@ class DCMSNewsUpdateView : DAPPEntityUpdateView {
     auto headerTitle = "News ID:"~(this.entity ? this.entity.id.toString : " - Unbekannt -");
     auto bodyTitle = "News Name:";
 
-    if (auto pgHeader = cast(DPageHeader)this.header) {
+    if (auto myHeader = cast(DPageHeader)this.header) {
       pgHeader
         .breadcrumbs(
           BS5Breadcrumb(

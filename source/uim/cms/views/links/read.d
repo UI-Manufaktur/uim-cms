@@ -12,19 +12,19 @@ override void initialize() {
 
     this.rootPath("/cms/links");
 
-    if (auto pgHeader = cast(DPageHeader)this.header) {
+    if (auto myHeader = cast(DPageHeader)this.header) {
       pgHeader
         .title(titleView("Link anzeigen"))
         .actions([["refresh", "list", "create"]])
         .rootPath(this.rootPath);
     }
 
-    if (auto frm = cast(DForm)this.form) {
+    if (auto myForm = cast(DForm)this.form) {
       frm
         .crudMode(this.crudMode)
         .content(CMSFormContent(myForm));
 
-      if (auto frmHeader = cast(DFormHeader)frm.header) {
+      if (auto myFormHeader = cast(DFormHeader)myForm.header) {
         frmHeader
           .mainTitle("Links")
           .subTitle("Links anzeigen");
@@ -40,7 +40,7 @@ override void initialize() {
     auto headerTitle = "Link ID:"~(this.entity ? this.entity.id.toString : " - Unbekannt -");
     auto bodyTitle = "Link Name:";
 
-    if (auto pgHeader = cast(DPageHeader)this.header) {
+    if (auto myHeader = cast(DPageHeader)this.header) {
       pgHeader
         .breadcrumbs(
           BS5Breadcrumb(

@@ -13,19 +13,19 @@ class DCMSLinksUpdateView : DAPPEntityUpdateView {
     this
       .rootPath("/cms/links");
 
-    if (auto pgHeader = cast(DPageHeader)this.header) {
+    if (auto myHeader = cast(DPageHeader)this.header) {
       pgHeader
         .title(titleEdit("Link bearbeiten"))
         .rootPath(this.rootPath);
     }
 
-    if (auto frm = cast(DForm)this.form) {
+    if (auto myForm = cast(DForm)this.form) {
       frm
         .action("/cms/links/actions/save")
         .crudMode(CRUDModes.Update)
         .content(CMSFormContent(myForm));
 
-      if (auto frmHeader = cast(DFormHeader)frm.header) {
+      if (auto myFormHeader = cast(DFormHeader)myForm.header) {
         frmHeader
           .mainTitle("Links")
           .subTitle("Links bearbeiten");
@@ -42,7 +42,7 @@ class DCMSLinksUpdateView : DAPPEntityUpdateView {
     auto headerTitle = "Link ID:"~(this.entity ? this.entity.id.toString : " - Unbekannt -");
     auto bodyTitle = "Link Name:";
 
-    if (auto pgHeader = cast(DPageHeader)this.header) {
+    if (auto myHeader = cast(DPageHeader)this.header) {
       pgHeader
         .breadcrumbs(
           BS5Breadcrumb(

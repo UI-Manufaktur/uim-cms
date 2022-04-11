@@ -13,19 +13,19 @@ class DCMSTutorialsUpdateView : DAPPEntityUpdateView {
     this
       .rootPath("/cms/tutorials");
 
-    if (auto pgHeader = cast(DPageHeader)this.header) {
+    if (auto myHeader = cast(DPageHeader)this.header) {
       pgHeader
         .title(titleEdit("Tutorial bearbeiten"))
         .rootPath(this.rootPath);
     }
 
-    if (auto frm = cast(DForm)this.form) {
+    if (auto myForm = cast(DForm)this.form) {
       frm
         .action("/cms/tutorials/actions/save")
         .crudMode(CRUDModes.Update)
         .content(CMSFormContent(myForm));
 
-      if (auto frmHeader = cast(DFormHeader)frm.header) {
+      if (auto myFormHeader = cast(DFormHeader)myForm.header) {
         frmHeader
           .mainTitle("Tutorials")
           .subTitle("Tutorials bearbeiten");
@@ -42,7 +42,7 @@ class DCMSTutorialsUpdateView : DAPPEntityUpdateView {
     auto headerTitle = "Tutorial ID:"~(this.entity ? this.entity.id.toString : " - Unbekannt -");
     auto bodyTitle = "Tutorial Name:";
 
-    if (auto pgHeader = cast(DPageHeader)this.header) {
+    if (auto myHeader = cast(DPageHeader)this.header) {
       pgHeader
         .breadcrumbs(
           BS5Breadcrumb(

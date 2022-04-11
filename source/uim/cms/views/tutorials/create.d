@@ -19,19 +19,19 @@ class DCMSTutorialsCreateView : DAPPEntityCreateView {
       .link(["active"], ["href":this.rootPath~"/create", "aria-current":"page"], "Create")
     );
 
-    if(auto header = cast(DPageHeader)this.header) {
+    if(auto myHeader = cast(DPageHeader)this.header) {
       header
         .breadcrumbs(bc)
         .title(titleCreate("Tutorial erstellen"))
         .rootPath(this.rootPath);
     }
     
-    if (auto frm = cast(DForm)this.form) {
+    if (auto myForm = cast(DForm)this.form) {
       frm
         .action(this.rootPath~"/actions/create")
         .content(CMSFormContent(myForm));
 
-      if (auto frmHeader = cast(DFormHeader)frm.header) {
+      if (auto myFormHeader = cast(DFormHeader)myForm.header) {
         frmHeader
           .mainTitle("Neuer Tutorial")
           .subTitle("Bitte Werte eingeben")
@@ -50,7 +50,7 @@ class DCMSTutorialsCreateView : DAPPEntityCreateView {
       this.entity(this.controller.database["uim"]["cms_tutorials"].createFromTemplate);
     }
 
-    if (auto frm = cast(DForm)this.form) {
+    if (auto myForm = cast(DForm)this.form) {
       frm
         .action(this.rootPath~"/actions/create")
         .entity(this.entity);

@@ -12,20 +12,29 @@ class DCMSDocusReadView : DAPPEntityReadView {
 
     this.rootPath("/cms/docus");
 
-    if (auto pgHeader = cast(DPageHeader)this.header) {
-      pgHeader
+    if (auto myHeader = cast(DPageHeader)this.header) {
+      myHeader
         .title(titleView("Docu anzeigen"))
         .actions([["refresh", "list", "create"]])
-        .rootPath(this.rootPath);
+        .rootPath(this.rootPath)
+        .breadcrumbs(
+          BS5Breadcrumb(
+            BS5BreadcrumbList
+            .link(["href":"/"], "UIM")
+            .link(["href":"/cms"], "CMS")
+            .link(["href":this.rootPath], "Docus")
+            .item(["active", "fw-bold"], "Anzeigen")
+          )          
+        );
     }
 
-    if (auto frm = cast(DForm)this.form) {
-      frm
+    if (auto myForm = cast(DForm)this.form) {
+      myForm
         .crudMode(this.crudMode)
         .content(CMSFormContent(myForm));
 
-      if (auto frmHeader = cast(DFormHeader)frm.header) {
-        frmHeader
+      if (auto myFormHeader = cast(DFormHeader)myForm.header) {
+        myFormHeader
           .mainTitle("Docus")
           .subTitle("Docus anzeigen");
       }
@@ -39,18 +48,6 @@ class DCMSDocusReadView : DAPPEntityReadView {
     
     auto headerTitle = "Docu ID:"~(this.entity ? this.entity.id.toString : " - Unbekannt -");
     auto bodyTitle = "Docu Name:";
-
-    if (auto pgHeader = cast(DPageHeader)this.header) {
-      pgHeader
-        .breadcrumbs(
-          BS5Breadcrumb(
-            BS5BreadcrumbList
-            .link(["href":"/cms"], "CMS")
-            .link(["href":this.rootPath], "Docus")
-            .link(["active":"active", "href":rootPath~"/view?id="~(this.entity ? this.entity["id"] : " -missing-")], "Anzeigen")
-          )          
-        );
-    }
 
     this.form
       .parameter("headerTitle", headerTitle)

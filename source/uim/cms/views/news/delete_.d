@@ -12,19 +12,19 @@ class DCMSNewsDeleteView : DAPPEntityDeleteView {
 
     this.rootPath("/cms/news");
 
-    if (auto header = cast(DPageHeader)this.header) {
+    if (auto myHeader = cast(DPageHeader)this.header) {
       header
         .title(titleDelete("News löschen"))
         .rootPath(this.rootPath);
     }
     
-     if (auto frm = cast(DForm)this.form) {
+     if (auto myForm = cast(DForm)this.form) {
       frm
         .action(this.rootPath~"/actions/delete")
-        .content(CMSFormContent)
+        .content(CMSFormContent(myForm))
         .rootPath(this.rootPath);
 
-      if (auto frmHeader = cast(DFormHeader)frm.header) {
+      if (auto myFormHeader = cast(DFormHeader)myForm.header) {
         frmHeader
         .mainTitle("News")
         .subTitle("News löschen");
@@ -39,7 +39,7 @@ class DCMSNewsDeleteView : DAPPEntityDeleteView {
     auto headerTitle = "News ID:"~(this.entity ? this.entity.id.toString : " - Unbekannt -");
     auto bodyTitle = "News Name:";
 
-    if (auto pgHeader = cast(DPageHeader)this.header) {
+    if (auto myHeader = cast(DPageHeader)this.header) {
       pgHeader
         .breadcrumbs(
           BS5Breadcrumb(

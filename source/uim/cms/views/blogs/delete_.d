@@ -12,20 +12,20 @@ class DCMSBlogsDeleteView : DAPPEntityDeleteView {
 
     this.rootPath("/cms/blogs");
 
-    if (auto header = cast(DPageHeader)this.header) {
+    if (auto myHeader = cast(DPageHeader)this.header) {
       header
         .title(titleDelete("Blog löschen"))
         .rootPath(this.rootPath);
     }
     
-     if (auto frm = cast(DForm)this.form) {
-      frm
+     if (auto myForm = cast(DForm)this.form) {
+      myForm
         .action(this.rootPath~"/actions/delete")
-        .content(CMSFormContent)
+        .content(CMSFormContent(myForm))
         .rootPath(this.rootPath);
 
-      if (auto frmHeader = cast(DFormHeader)frm.header) {
-        frmHeader
+      if (auto myFormHeader = cast(DFormHeader)myForm.header) {
+        myFormHeader
         .mainTitle("Blogs")
         .subTitle("Blogs löschen");
       }
@@ -39,7 +39,7 @@ class DCMSBlogsDeleteView : DAPPEntityDeleteView {
     auto headerTitle = "Blog ID:"~(this.entity ? this.entity.id.toString : " - Unbekannt -");
     auto bodyTitle = "Blog Name:";
 
-    if (auto pgHeader = cast(DPageHeader)this.header) {
+    if (auto myHeader = cast(DPageHeader)this.header) {
       pgHeader
         .breadcrumbs(
           BS5Breadcrumb(

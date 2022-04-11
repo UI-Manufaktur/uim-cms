@@ -21,6 +21,12 @@ class DCMSBlogsIndexView : DAPPEntitiesListView {
     auto headerTitle = titleList("Blogs");
     auto bodyTitle = "Gefundene Blogs";
 
+    auto myForm = APPEntitiesListForm(this)
+      .header(
+        FormHeader
+          .mainTitle("Blogs")
+          .subTitle("Blogs anzeigen")
+          .actions([["print", "export"]]));
     this
       .header(
         PageHeader(this)
@@ -30,13 +36,8 @@ class DCMSBlogsIndexView : DAPPEntitiesListView {
           .rootPath(this.rootPath)
       )
       .form(
-        APPEntitiesListForm(this)
-          .header(
-            FormHeader
-              .mainTitle("Blogs")
-              .subTitle("Blogs anzeigen")
-              .actions([["print", "export"]]))
-          .content(EntitiesFormContent)
+        myForm
+          .content(EntitiesFormContent(myForm))
           .rootPath(this.rootPath));
   }
 
@@ -45,8 +46,8 @@ class DCMSBlogsIndexView : DAPPEntitiesListView {
     super.beforeH5(options);
     if (hasError || "redirect" in options) { return; }
 
-    if (auto frm = cast(DForm)this.form) {
-      frm.entities(this.entities);
+    if (auto myForm = cast(DForm)this.form) {
+      myForm.entities(this.entities);
     } 
   }
 

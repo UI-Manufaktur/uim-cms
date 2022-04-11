@@ -13,19 +13,19 @@ class DCMSPagesUpdateView : DAPPEntityUpdateView {
     this
       .rootPath("/cms/pages");
 
-    if (auto pgHeader = cast(DPageHeader)this.header) {
+    if (auto myHeader = cast(DPageHeader)this.header) {
       pgHeader
         .title(titleEdit("Page bearbeiten"))
         .rootPath(this.rootPath);
     }
 
-    if (auto frm = cast(DForm)this.form) {
+    if (auto myForm = cast(DForm)this.form) {
       frm
         .action("/cms/pages/actions/save")
         .crudMode(CRUDModes.Update)
         .content(CMSFormContent(myForm));
 
-      if (auto frmHeader = cast(DFormHeader)frm.header) {
+      if (auto myFormHeader = cast(DFormHeader)myForm.header) {
         frmHeader
           .mainTitle("Pages")
           .subTitle("Pages bearbeiten");
@@ -42,7 +42,7 @@ class DCMSPagesUpdateView : DAPPEntityUpdateView {
     auto headerTitle = "Page ID:"~(this.entity ? this.entity.id.toString : " - Unbekannt -");
     auto bodyTitle = "Page Name:";
 
-    if (auto pgHeader = cast(DPageHeader)this.header) {
+    if (auto myHeader = cast(DPageHeader)this.header) {
       pgHeader
         .breadcrumbs(
           BS5Breadcrumb(

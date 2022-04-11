@@ -13,19 +13,19 @@ class DCMSGlossaryUpdateView : DAPPEntityUpdateView {
     this
       .rootPath("/cms/glossarys");
 
-    if (auto pgHeader = cast(DPageHeader)this.header) {
+    if (auto myHeader = cast(DPageHeader)this.header) {
       pgHeader
         .title(titleEdit("Glossary bearbeiten"))
         .rootPath(this.rootPath);
     }
 
-    if (auto frm = cast(DForm)this.form) {
+    if (auto myForm = cast(DForm)this.form) {
       frm
         .action("/cms/glossarys/actions/save")
         .crudMode(CRUDModes.Update)
         .content(CMSFormContent(myForm));
 
-      if (auto frmHeader = cast(DFormHeader)frm.header) {
+      if (auto myFormHeader = cast(DFormHeader)myForm.header) {
         frmHeader
           .mainTitle("Glossary")
           .subTitle("Glossary bearbeiten");
@@ -42,7 +42,7 @@ class DCMSGlossaryUpdateView : DAPPEntityUpdateView {
     auto headerTitle = "Glossary ID:"~(this.entity ? this.entity.id.toString : " - Unbekannt -");
     auto bodyTitle = "Glossary Name:";
 
-    if (auto pgHeader = cast(DPageHeader)this.header) {
+    if (auto myHeader = cast(DPageHeader)this.header) {
       pgHeader
         .breadcrumbs(
           BS5Breadcrumb(

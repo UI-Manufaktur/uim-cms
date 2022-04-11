@@ -36,7 +36,7 @@ class DCMSGlossaryIndexView : DAPPEntitiesListView {
               .mainTitle("Glossary")
               .subTitle("Glossary anzeigen")
               .actions([["print", "export"]]))
-          .content(EntitiesFormContent)
+          .content(EntitiesFormContent(myForm))
           .rootPath(this.rootPath));
   }
 
@@ -45,7 +45,7 @@ class DCMSGlossaryIndexView : DAPPEntitiesListView {
     super.beforeH5(options);
     if (hasError || "redirect" in options) { return; }
   
-    if (auto frm = cast(DForm)this.form) {
+    if (auto myForm = cast(DForm)this.form) {
       frm.entities(this.entities);
     } 
   }

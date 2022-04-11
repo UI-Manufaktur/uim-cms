@@ -13,20 +13,20 @@ class DCMSBlogsUpdateView : DAPPEntityUpdateView {
     this
       .rootPath("/cms/blogs");
 
-    if (auto pgHeader = cast(DPageHeader)this.header) {
-      pgHeader
+    if (auto myHeader = cast(DPageHeader)this.header) {
+      myHeader
         .title(titleEdit("Blog bearbeiten"))
         .rootPath(this.rootPath);
     }
 
-    if (auto frm = cast(DForm)this.form) {
-      frm
+    if (auto myForm = cast(DForm)this.form) {
+      myForm
         .action("/cms/blogs/actions/save")
         .crudMode(CRUDModes.Update)
         .content(CMSFormContent(myForm));
 
-      if (auto frmHeader = cast(DFormHeader)frm.header) {
-        frmHeader
+      if (auto myFormHeader = cast(DFormHeader)myForm.header) {
+        myFormHeader
           .mainTitle("Blogs")
           .subTitle("Blogs bearbeiten");
       }
@@ -42,7 +42,7 @@ class DCMSBlogsUpdateView : DAPPEntityUpdateView {
     auto headerTitle = "Blog ID:"~(this.entity ? this.entity.id.toString : " - Unbekannt -");
     auto bodyTitle = "Blog Name:";
 
-    if (auto pgHeader = cast(DPageHeader)this.header) {
+    if (auto myHeader = cast(DPageHeader)this.header) {
       pgHeader
         .breadcrumbs(
           BS5Breadcrumb(
