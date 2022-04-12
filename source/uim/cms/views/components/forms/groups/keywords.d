@@ -19,9 +19,9 @@ class DCMSFormGroupKeywords : DFormGroup {
   }
   override DH5Obj[] toH5(STRINGAA options = null) { // hook
     super.toH5(options);
-    if (hasError) { return null; }
+    if (hasError || "redirect" in options) { return null; }
     
-    auto input = BS5InputText(id, ["name":name]);   
+    auto input = BS5InputText(id, ["name":inputName]);   
     if (_crudMode != CRUDModes.Create && entity) input.value(entity["keywords"].split(",").map!(a => a.strip).join(" #"));
     if (_crudMode == CRUDModes.Read || _crudMode == CRUDModes.Delete) input.attribute("readonly","readonly");
     

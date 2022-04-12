@@ -49,7 +49,7 @@ class DCMSFormGroupTheme : DFormGroup {
         : H5Option(["value":theme.id.toString], theme.display)).array.toH5;
     }
 
-    auto input = H5Select(name, ["form-select"], ["name":name, "readonly":"readonly", "value":entity["theme"]], selectOptions); 
+    auto input = H5Select(name, ["form-select"], ["name":inputName, "readonly":"readonly", "value":entity["theme"]], selectOptions); 
     if (_crudMode != CRUDModes.Create && entity) input.attribute("value", entity["theme"]);
     if (_crudMode == CRUDModes.Read || _crudMode == CRUDModes.Delete) input.attribute("disabled","disabled");
     
