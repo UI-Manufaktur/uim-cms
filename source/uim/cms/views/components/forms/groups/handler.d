@@ -11,14 +11,14 @@ class DCMSFormInputHandler : DFormInputHandler {
 
     this
       .addFormInputs([
-        "private": CMSFormInputPrivate, 
-        "maintitle": CMSFormInputMainTitle, 
-        "subtitle": CMSFormInputSubTitle, 
-        "keywords": CMSFormInputKeywords, 
-        "image": CMSFormInputImage, 
-        "summary": CMSFormInputSummary, 
-        "text": CMSFormInputText, 
-        "themes": CMSFormInputTheme]);
+        "private": CMSPrivateFormInput, 
+        "maintitle": CMSMainTitleFormInput, 
+        "subtitle": CMSSubTitleFormInput, 
+        "keywords": CMSKeywordsFormInput, 
+        "image": CMSImageFormInput, 
+        "summary": CMSSummaryFormInput, 
+        "text": CMSTextFormInput, 
+        "themes": CMSThemesFormInput]);
   } 
 }  
 mixin(FormComponentCalls!("CMSFormInputHandler", true));

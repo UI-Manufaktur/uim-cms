@@ -3,8 +3,8 @@ module uim.cms.views.components.forms.groups.private_;
 @safe:
 import uim.cms;
 
-class DCMSFormGroupPrivate : DAPPSwitchFormGroup {
-  mixin(FormComponentThis!("entity_private"));  // not CMSFormGroupPrivate!
+class DCMSPrivateFormInput : DSwitchFormInput {
+  mixin(FormComponentThis!("entity_private"));  // not CMSPrivateFormInput!
   this(DOOPEntity myEntity) { this().entity(myEntity); }
   this(DForm myForm, DOOPEntity myEntity) { this(myForm).entity(myEntity); }
 
@@ -18,7 +18,7 @@ class DCMSFormGroupPrivate : DAPPSwitchFormGroup {
     .label("Privat"); 
   }
 }
-mixin(FormComponentCalls!("CMSFormGroupPrivate"));
+mixin(FormComponentCalls!("CMSPrivateFormInput"));
 
 version(test_uim_cms) {
   unittest {

@@ -3,8 +3,8 @@ module uim.cms.views.components.forms.groups.keywords;
 @safe:
 import uim.cms;
 
-class DCMSFormGroupKeywords : DFormInput {
-  mixin(FormComponentThis!("CMSFormGroupKeywords", true));
+class DCMSKeywordsFormInput : DFormInput {
+  mixin(FormComponentThis!("CMSKeywordsFormInput", true));
 
   override void initialize() {
     super.initialize;
@@ -31,7 +31,7 @@ class DCMSFormGroupKeywords : DFormInput {
         BS5Col(["col"], input))].toH5;
   }
 }
-mixin(FormComponentCalls!("CMSFormGroupKeywords", true));
+mixin(FormComponentCalls!("CMSKeywordsFormInput", true));
 
 version(test_uim_cms) {
   unittest {

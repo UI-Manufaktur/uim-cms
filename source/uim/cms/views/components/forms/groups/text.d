@@ -3,8 +3,8 @@ module uim.cms.views.components.forms.groups.text;
 @safe:
 import uim.cms;
 
-class DCMSFormGroupText : DAPPTextAreaFormGroup {
-  mixin(FormComponentThis!("CMSFormGroupText", true));
+class DCMSTextFormInput : DTextAreaFormInput {
+  mixin(FormComponentThis!("CMSTextFormInput", true));
 
   override void initialize() {
     super.initialize();
@@ -17,9 +17,9 @@ class DCMSFormGroupText : DAPPTextAreaFormGroup {
     .label("Inhalt");
   }
 }
-mixin(FormComponentCalls!("CMSFormGroupText", true));
+mixin(FormComponentCalls!("CMSTextFormInput", true));
 
 version(test_uim_cms) {
   unittest {
-    assert(CMSFormGroupText);
+    assert(CMSTextFormInput);
 }}

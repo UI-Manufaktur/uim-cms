@@ -3,8 +3,8 @@ module uim.cms.views.components.forms.groups.image;
 @safe:
 import uim.cms;
 
-class DCMSFormGroupImage : DAPPTextFormGroup {
-  mixin(FormComponentThis!("CMSFormGroupImage", true));
+class DCMSImageFormInput : DTextFormInput {
+  mixin(FormComponentThis!("CMSImageFormInput", true));
   
   override void initialize() {
     super.initialize;
@@ -17,9 +17,9 @@ class DCMSFormGroupImage : DAPPTextFormGroup {
     .label("Titelbild"); 
   }
 }
-mixin(FormComponentCalls!("CMSFormGroupImage", true));
+mixin(FormComponentCalls!("CMSImageFormInput", true));
 
 version(test_uim_cms) {
   unittest {
-    // assert(CMSFormGroupImage);
+    // assert(CMSImageFormInput);
 }}

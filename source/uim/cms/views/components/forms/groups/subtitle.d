@@ -3,8 +3,8 @@ module uim.cms.views.components.forms.groups.subtitle;
 @safe:
 import uim.cms;
 
-class DCMSFormGroupSubTitle : DAPPTextFormGroup {
-  mixin(FormComponentThis!("CMSFormGroupSubTitle", true));
+class DCMSSubTitleFormInput : DTextFormInput {
+  mixin(FormComponentThis!("CMSSubTitleFormInput", true));
 
   override void initialize() {
     super.initialize;
@@ -17,7 +17,7 @@ class DCMSFormGroupSubTitle : DAPPTextFormGroup {
     .label("Untertitle"); 
   }
 }
-mixin(FormComponentCalls!("CMSFormGroupSubTitle", true));
+mixin(FormComponentCalls!("CMSSubTitleFormInput", true));
 
 version(test_uim_cms) {
   unittest {

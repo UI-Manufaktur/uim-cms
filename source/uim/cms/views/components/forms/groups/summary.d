@@ -3,8 +3,8 @@ module uim.cms.views.components.forms.groups.summary;
 @safe:
 import uim.cms;
 
-class DCMSFormGroupSummary : DAPPTextAreaFormGroup {
-  mixin(FormComponentThis!("CMSFormGroupSummary", true));
+class DCMSSummaryFormInput : DTextAreaFormInput {
+  mixin(FormComponentThis!("CMSSummaryFormInput", true));
 
   override void initialize() {
     super.initialize();
@@ -17,7 +17,7 @@ class DCMSFormGroupSummary : DAPPTextAreaFormGroup {
     .label("Zusammenfassung");  
   }
 }
-mixin(FormComponentCalls!("CMSFormGroupSummary", true));
+mixin(FormComponentCalls!("CMSSummaryFormInput", true));
 
 version(test_uim_cms) {
   unittest {

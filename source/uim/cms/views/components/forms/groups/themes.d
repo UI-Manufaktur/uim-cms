@@ -1,10 +1,10 @@
-module uim.cms.views.components.forms.groups.theme;
+module uim.cms.views.components.forms.groups.themes;
 
 @safe:
 import uim.cms;
 
-class DCMSFormGroupTheme : DFormInput {
-  mixin(FormComponentThis!("CMSFormGroupTheme", true));
+class DCMSThemeFormInput : DFormInput {
+  mixin(FormComponentThis!("CMSThemeFormInput", true));
 
   override void initialize() {
     super.initialize;
@@ -59,7 +59,7 @@ class DCMSFormGroupTheme : DFormInput {
         BS5Col(["col"], input))].toH5;
   }
 }
-mixin(FormComponentCalls!("CMSFormGroupTheme", true));
+mixin(FormComponentCalls!("CMSThemeFormInput", true));
 
 version(test_uim_cms) {
   unittest {
