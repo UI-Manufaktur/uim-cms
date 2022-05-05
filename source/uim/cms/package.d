@@ -74,8 +74,6 @@ public import uim.cms.layouts;
 public import uim.cms.translations;
 public import uim.cms.views;
 
-public import models.cms.entities;
-
 auto editorSummary = `const editorSummary = KothingEditor.create("entity_summary", {
   display: "block",
   width: "100%",

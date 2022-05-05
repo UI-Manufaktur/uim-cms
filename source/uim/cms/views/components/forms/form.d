@@ -2,7 +2,6 @@ module uim.cms.views.components.forms.form;
 
 @safe:
 import uim.cms;
-import models.cms.entities.demo;
 
 class DCMSForm : DForm {
   mixin(ViewComponentThis!("CMSForm"));

@@ -2,7 +2,6 @@ module uim.cms.views.components.forms.posts.links;
 
 @safe:
 import uim.cms;
-import models.cms.entities.link;
 
 class DCMSLinkForm : DCMSPostForm {
   mixin(ViewComponentThis!("CMSLinkForm", true));

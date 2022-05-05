@@ -2,7 +2,6 @@ module uim.cms.views.components.forms.posts.offers;;
 
 @safe:
 import uim.cms;
-import models.cms.entities.offer;
 
 class DCMSOfferForm : DCMSPostForm {
   mixin(ViewComponentThis!("CMSOfferForm", true));
