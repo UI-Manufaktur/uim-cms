@@ -3,22 +3,22 @@ module uim.cms.views.components.forms.groups.handler;
 @safe:
 import uim.cms;
 
-class DCMSFormGroupHandler : DFormInputHandler {
-  mixin(FormComponentThis!("CMSFormGroupHandler", true));
+class DCMSFormInputHandler : DFormInputHandler {
+  mixin(FormComponentThis!("CMSFormInputHandler", true));
 
   override void initialize() {
     super.initialize;
 
     this
-      .addFormGroups([
-        "private": CMSFormGroupPrivate, 
-        "maintitle": CMSFormGroupMainTitle, 
-        "subtitle": CMSFormGroupSubTitle, 
-        "keywords": CMSFormGroupKeywords, 
-        "image": CMSFormGroupImage, 
-        "summary": CMSFormGroupSummary, 
-        "text": CMSFormGroupText, 
-        "themes": CMSFormGroupTheme]);
+      .addFormInputs([
+        "private": CMSFormInputPrivate, 
+        "maintitle": CMSFormInputMainTitle, 
+        "subtitle": CMSFormInputSubTitle, 
+        "keywords": CMSFormInputKeywords, 
+        "image": CMSFormInputImage, 
+        "summary": CMSFormInputSummary, 
+        "text": CMSFormInputText, 
+        "themes": CMSFormInputTheme]);
   } 
 }  
-mixin(FormComponentCalls!("CMSFormGroupHandler", true));
+mixin(FormComponentCalls!("CMSFormInputHandler", true));
