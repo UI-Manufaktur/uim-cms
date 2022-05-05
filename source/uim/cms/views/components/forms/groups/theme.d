@@ -3,7 +3,7 @@ module uim.cms.views.components.forms.groups.theme;
 @safe:
 import uim.cms;
 
-class DCMSFormGroupTheme : DFormGroup {
+class DCMSFormGroupTheme : DFormInput {
   mixin(FormComponentThis!("CMSFormGroupTheme", true));
 
   override void initialize() {

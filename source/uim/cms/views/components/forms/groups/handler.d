@@ -3,7 +3,7 @@ module uim.cms.views.components.forms.groups.handler;
 @safe:
 import uim.cms;
 
-class DCMSFormGroupHandler : DFormGroupHandler {
+class DCMSFormGroupHandler : DFormInputHandler {
   mixin(FormComponentThis!("CMSFormGroupHandler", true));
 
   override void initialize() {

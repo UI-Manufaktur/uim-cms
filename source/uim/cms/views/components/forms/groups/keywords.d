@@ -3,7 +3,7 @@ module uim.cms.views.components.forms.groups.keywords;
 @safe:
 import uim.cms;
 
-class DCMSFormGroupKeywords : DFormGroup {
+class DCMSFormGroupKeywords : DFormInput {
   mixin(FormComponentThis!("CMSFormGroupKeywords", true));
 
   override void initialize() {
