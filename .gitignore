@@ -1,0 +1,4 @@
+dub.selections.json
+uim-cms-test-offline
+.dub/build/uim-cms-test-offline-unittest-linux.posix-x86_64-dmd_v2.098.0-01C266BB93500537B8B4790CB83B89C4/uim-cms-test-offline
+.dub/build/uim-cms-test-offline-unittest-linux.posix-x86_64-dmd_v2.098.0-01C266BB93500537B8B4790CB83B89C4/uim-cms-test-offline.o
