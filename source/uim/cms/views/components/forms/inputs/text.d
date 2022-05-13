@@ -1,4 +1,4 @@
-module uim.cms.views.components.forms.groups.text;
+module uim.cms.views.components.forms.inputs.text;
 
 @safe:
 import uim.cms;

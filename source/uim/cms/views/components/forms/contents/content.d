@@ -12,7 +12,7 @@ class DCMSFormContent : DEntityFormContent {
     this
     .crudMode(CRUDModes.Read)
     .addFields(["private", "maintitle", "subtitle", "keywords", "image", "summary", "themes", "text"])
-    .formGroupHandler(CMSFormGroupHandler); 
+    .inputHandler(CMSFormInputHandler); 
   }
 
 /*   override DH5Obj[] formGroup(string field, bool readonly, STRINGAA options = null) {

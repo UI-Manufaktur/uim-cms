@@ -1,4 +1,4 @@
-module uim.cms.views.components.forms.groups.handler;
+module uim.cms.views.components.forms.inputs.handler;
 
 @safe:
 import uim.cms;

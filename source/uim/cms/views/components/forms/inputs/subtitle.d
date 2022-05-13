@@ -1,4 +1,4 @@
-module uim.cms.views.components.forms.groups.subtitle;
+module uim.cms.views.components.forms.inputs.subtitle;
 
 @safe:
 import uim.cms;

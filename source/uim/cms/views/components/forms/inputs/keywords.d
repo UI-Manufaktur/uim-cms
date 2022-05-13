@@ -1,4 +1,4 @@
-module uim.cms.views.components.forms.groups.keywords;
+module uim.cms.views.components.forms.inputs.keywords;
 
 @safe:
 import uim.cms;

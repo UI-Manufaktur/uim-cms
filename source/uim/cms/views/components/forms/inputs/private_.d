@@ -1,4 +1,4 @@
-module uim.cms.views.components.forms.groups.private_;
+module uim.cms.views.components.forms.inputs.private_;
 
 @safe:
 import uim.cms;

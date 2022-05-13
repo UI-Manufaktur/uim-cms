@@ -1,4 +1,4 @@
-module uim.cms.views.components.forms.groups.image;
+module uim.cms.views.components.forms.inputs.image;
 
 @safe:
 import uim.cms;

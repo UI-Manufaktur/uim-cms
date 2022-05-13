@@ -1,4 +1,4 @@
-module uim.cms.views.components.forms.groups.mainTitle;
+module uim.cms.views.components.forms.inputs.mainTitle;
 
 @safe:
 import uim.cms;

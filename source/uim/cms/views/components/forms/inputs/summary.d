@@ -1,4 +1,4 @@
-module uim.cms.views.components.forms.groups.summary;
+module uim.cms.views.components.forms.inputs.summary;
 
 @safe:
 import uim.cms;
